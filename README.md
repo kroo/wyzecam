@@ -18,36 +18,6 @@ Python package for communicating with wyze cameras over the local network
 
 ## Very first steps
 
-### Initial
-
-1. Initialize `git` inside your repo:
-
-```bash
-git init
-```
-
-2. If you don't have `Poetry` installed run:
-
-```bash
-make download-poetry
-```
-
-3. Initialize poetry and install `pre-commit` hooks:
-
-```bash
-make install
-```
-
-4. Upload initial code to GitHub (ensure you've run `make install` to use `pre-commit`):
-
-```bash
-git add .
-git commit -m ":tada: Initial commit"
-git branch -M main
-git remote add origin https://github.com/kroo/wyzecam.git
-git push -u origin main
-```
-
 ### Initial setting up
 
 - Set up [Dependabot](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates#enabling-github-dependabot-version-updates) to ensure you have the latest dependencies.
@@ -109,23 +79,7 @@ For your development we've prepared:
 - Testing with [`pytest`](https://docs.pytest.org/en/latest/).
 - Docstring checks with [`darglint`](https://github.com/terrencepreilly/darglint).
 - Security checks with [`safety`](https://github.com/pyupio/safety) and [`bandit`](https://github.com/PyCQA/bandit).
-- Well-made [`.editorconfig`](https://github.com/kroo/wyzecam/blob/master/.editorconfig), [`.dockerignore`](https://github.com/kroo/wyzecam/blob/master/.dockerignore), and [`.gitignore`](https://github.com/kroo/wyzecam/blob/master/.gitignore). You don't have to worry about those things.
 
-For building and deployment:
-
-- `GitHub` integration.
-- [`Makefile`](https://github.com/kroo/wyzecam/blob/master/Makefile#L89) for building routines. Everything is already set up for security checks, codestyle checks, code formatting, testing, linting, docker builds, etc. More details at [Makefile summary](#makefile-usage)).
-- [Dockerfile](https://github.com/kroo/wyzecam/blob/master/docker/Dockerfile) for your package.
-- `Github Actions` with predefined [build workflow](https://github.com/kroo/wyzecam/blob/master/.github/workflows/build.yml) as the default CI/CD.
-- Always up-to-date dependencies with [`@dependabot`](https://dependabot.com/) (You will only [enable it](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates#enabling-github-dependabot-version-updates)).
-- Automatic drafts of new releases with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter). It creates a list of changes based on labels in merged `Pull Requests`. You can see labels (aka `categories`) in [`release-drafter.yml`](https://github.com/kroo/wyzecam/blob/master/.github/release-drafter.yml). Works perfectly with [Semantic Versions](https://semver.org/) specification.
-
-For creating your open source community:
-
-- Ready-to-use [Pull Requests templates](https://github.com/kroo/wyzecam/blob/master/.github/PULL_REQUEST_TEMPLATE.md) and several [Issue templates](https://github.com/kroo/wyzecam/tree/master/.github/ISSUE_TEMPLATE).
-- Files such as: `LICENSE`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` are generated automatically.
-- [`Stale bot`](https://github.com/apps/stale) that closes abandoned issues after a period of inactivity. (You will only [need to setup free plan](https://github.com/marketplace/stale)). Configuration is [here](https://github.com/kroo/wyzecam/blob/master/.github/.stale.yml).
-- [Semantic Versions](https://semver.org/) specification with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter).
 
 ## Installation
 
@@ -282,44 +236,6 @@ make test && make check-safety && make check-style
 ```
 
 > List of flags for `lint` (can be set to `1` or `0`): `STRICT`, `POETRY_STRICT`, `PIP_STRICT`, `SAFETY_STRICT`, `BANDIT_STRICT`, `BLACK_STRICT`, `DARGLINT_STRICT`, `ISORT_STRICT`, `MYPY_STRICT`.
-
-</p>
-</details>
-
-<details>
-<summary>8. Build docker</summary>
-<p>
-
-```bash
-make docker
-```
-
-which is equivalent to:
-
-```bash
-make docker VERSION=latest
-```
-
-More information [here](https://github.com/kroo/wyzecam/tree/master/docker).
-
-</p>
-</details>
-
-<details>
-<summary>9. Cleanup docker</summary>
-<p>
-
-```bash
-make clean_docker
-```
-
-or to remove all build
-
-```bash
-make clean
-```
-
-More information [here](https://github.com/kroo/wyzecam/tree/master/docker).
 
 </p>
 </details>
