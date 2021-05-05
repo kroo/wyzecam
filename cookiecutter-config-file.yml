@@ -1,0 +1,10 @@
+# This file contains values from Cookiecutter
+
+default_context:
+  project_name: "wyzecam"
+  project_description: "Python package for communicating with wyze cameras over the local network"
+  organization: "kroo"
+  license: "MIT"
+  version: "1.0.0"
+  github_name: "kroo"
+  email: "elliot@kroo.net"
