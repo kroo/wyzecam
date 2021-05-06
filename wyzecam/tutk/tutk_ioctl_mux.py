@@ -172,7 +172,7 @@ class TutkIOCtrlMux:
         ```
 
         :param msg: The message to send to the client. See
-                    [tutk_protocol.py Commands](/reference/tutk/tutk_protocol_commands/)
+                    [tutk_protocol.py Commands](../tutk_protocol_commands/)
         :param ctrl_type: used internally by the iotc library, should always be
                           `tutk.IOTYPE_USER_DEFINED_START`.
 

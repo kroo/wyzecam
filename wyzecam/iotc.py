@@ -141,11 +141,11 @@ class WyzeIOTC:
                 ...  # send configuration commands, or stream video from the session.
         ```
 
-        See [WyzeIOTCSession](/reference/iotc_session/) for more info.
+        See [WyzeIOTCSession](../iotc_session/) for more info.
 
         :param account: the account object returned from [wyzecam.api.get_user_info][]
         :param camera: the camera object returned from [wyzecam.api.get_camera_list][]
-        :returns: An object representing the Wyze IOTC Session, a [WyzeIOTCSession](/reference/iotc_session/)
+        :returns: An object representing the Wyze IOTC Session, a [WyzeIOTCSession](../iotc_session/)
         """
         return WyzeIOTCSession(self.tutk_platform_lib, account, camera)
 
@@ -211,7 +211,7 @@ class WyzeIOTCSession:
     :var session_id: The id of this session, once connected.
     :var av_chan_id: The AV channel of this session, once connected.
     :var state: The current connection state of this session.  See
-                [WyzeIOTCSessionState](/reference/iotc_session_state/).
+                [WyzeIOTCSessionState](../iotc_session_state/).
     """
 
     def __init__(

@@ -42,4 +42,4 @@ with wyzecam.WyzeIOTC() as wyze_iotc:
 
 ## Installation
 
-See [installation](/installation/) for detailed instructions.
+See [installation](installation/) for detailed instructions.

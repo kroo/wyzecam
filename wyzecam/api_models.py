@@ -54,7 +54,7 @@ class WyzeCamera(BaseModel):
     :var mac: the mac address of the camera.
     :var product_model: the product model (or type) of camera
     :var camera_info: populated as a result of authenticating with a camera
-                      using a [WyzeIOTCSession](/reference/iotc_session/).
+                      using a [WyzeIOTCSession](../../iotc_session/).
     :var nickname: the user specified 'nickname' of the camera
     :var timezone_name: the timezone of the camera
 

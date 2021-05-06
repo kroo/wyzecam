@@ -65,7 +65,7 @@ convenient.
 unzip TUTK_IOTC_Platform_14W42P1.zip
 cd Lib/MAC/
 g++ -fpic -shared -Wl,-all_load libIOTCAPIs_ALL.a -o libIOTCAPIs_ALL.dylib
-cp libIOTCAPIs_ALL.dylib  zg
+cp libIOTCAPIs_ALL.dylib /usr/local/lib/
 ```
 
 ### On Linux:
