@@ -10,8 +10,6 @@ from queue import Empty, Queue
 from . import tutk, tutk_protocol
 from .tutk_protocol import TutkWyzeProtocolMessage
 
-QUEUE_TYPE = Queue[Union[object, Tuple[int, int, int, bytes]]]
-
 STOP_SENTINEL = object()
 CONTROL_CHANNEL = "CONTROL"
 
@@ -34,7 +32,9 @@ class TutkIOCtrlFuture:
     def __init__(
         self,
         req: TutkWyzeProtocolMessage,
-        queue: Optional[QUEUE_TYPE] = None,
+        queue: Optional[
+            Queue[Union[object, Tuple[int, int, int, bytes]]]
+        ] = None,
         errcode: Optional[c_int] = None,
     ):
         self.req: TutkWyzeProtocolMessage = req
@@ -115,9 +115,9 @@ class TutkIOCtrlMux:
         """
         self.tutk_platform_lib = tutk_platform_lib
         self.av_chan_id = av_chan_id
-        self.queues: DefaultDict[Union[str, int], QUEUE_TYPE] = defaultdict(
-            Queue
-        )
+        self.queues: DefaultDict[
+            Union[str, int], Queue[Union[object, Tuple[int, int, int, bytes]]]
+        ] = defaultdict(Queue)
         self.listener = TutkIOCtrlMuxListener(
             tutk_platform_lib, av_chan_id, self.queues
         )
