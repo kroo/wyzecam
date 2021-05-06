@@ -4,11 +4,8 @@ import ctypes
 
 
 # noinspection PyPep8Naming,PyMethodMayBeStatic
-class MockTutkLibrary(ctypes.CDLL):
+class MockTutkLibrary:
     """A mock tutk_platform_lib, for testing"""
-
-    def __init__(self):
-        super().__init__("libIOTCAPIs_ALL.dylib")
 
     def avRecvFrameData2(
         self,
