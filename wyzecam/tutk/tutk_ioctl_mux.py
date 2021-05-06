@@ -260,7 +260,9 @@ class TutkIOCtrlMuxListener(threading.Thread):
         self,
         tutk_platform_lib: CDLL,
         av_chan_id: c_int,
-        queues: DefaultDict[Union[int, str], QUEUE_TYPE],
+        queues: DefaultDict[
+            Union[int, str], Queue[Union[object, Tuple[int, int, int, bytes]]]
+        ],
     ):
         super().__init__()
         self.tutk_platform_lib = tutk_platform_lib
