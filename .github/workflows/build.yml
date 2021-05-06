@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2.2.1
+      uses: actions/setup-python@v2.2.2
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -28,6 +28,7 @@ jobs:
       run: |
         source "$HOME/.poetry/env"
         poetry config virtualenvs.in-project true
+        poetry run pip install -U pip
         poetry install
 
     - name: Run safety checks

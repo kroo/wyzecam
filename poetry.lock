@@ -63,7 +63,7 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 name = "av"
 version = "8.0.3"
 description = "Pythonic bindings for FFmpeg's libraries."
-category = "main"
+category = "dev"
 optional = true
 python-versions = "*"
 
@@ -586,7 +586,7 @@ python-versions = "*"
 name = "numpy"
 version = "1.20.2"
 description = "NumPy is the fundamental package for array computing with Python."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -594,7 +594,7 @@ python-versions = ">=3.7"
 name = "opencv-python"
 version = "4.5.1.48"
 description = "Wrapper package for OpenCV python bindings."
-category = "main"
+category = "dev"
 optional = true
 python-versions = ">=3.6"
 
@@ -1046,7 +1046,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ce9ce187316d9a22a7ab0f7561a7a6bd8ff6e3d408d3b94e421063229a551edd"
+content-hash = "722219ca0de37a3b9102531224fb395fc1b869df939870bb028de829bd8c75a6"
 
 [metadata.files]
 appdirs = [
