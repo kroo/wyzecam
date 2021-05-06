@@ -14,7 +14,7 @@ repos:
     hooks:
       - id: pyupgrade
         name: pyupgrade
-        entry: poetry run pyupgrade --py37-plus
+        entry: poetry run pyupgrade --py38-plus
         types: [python]
         language: system
 

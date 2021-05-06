@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := build
+
 SHELL := /usr/bin/env bash
 
 IMAGE := wyzecam
@@ -110,7 +112,7 @@ check-style:
 	$(BLACK_COMMAND_FLAG)poetry run black --config pyproject.toml --diff --check ./
 	$(DARGLINT_COMMAND_FLAG)poetry run darglint -v 2 **/*.py
 	$(ISORT_COMMAND_FLAG)poetry run isort --settings-path pyproject.toml --check-only **/*.py
-	$(MYPY_COMMAND_FLAG)poetry run mypy --config-file setup.cfg wyzecam tests/**/*.py
+	$(MYPY_COMMAND_FLAG)poetry run mypy --config-file setup.cfg wyzecam tests/**.py
 
 .PHONY: codestyle
 codestyle:
@@ -131,3 +133,14 @@ clean:
 
 .PHONY: clean
 clean: clean_build
+
+build: lint poetry_build docs
+poetry_build:
+	poetry build
+
+docs:
+	poetry run mkdocs build
+
+publish: build poetry_publish
+poetry_publish:
+	poetry publish

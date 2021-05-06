@@ -1,0 +1,47 @@
+site_name: WyzeCam Documentation
+theme:
+  name: "material"
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      default_handler: python
+      watch:
+        - wyzecam
+        - wyzecam/tutk
+        - wyzecam/mock
+      handlers:
+        python:
+          selection:
+            docstring_style: restructured-text
+          rendering:
+            show_signature_annotations: False
+            group_by_category: True
+            show_category_heading: True
+            show_root_toc_entry: True
+            show_root_full_path: False
+            show_root_heading: True
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Code Reference:
+      - Wyze API:
+        - Functions: reference/wyze_api/wyze_api_functions.md
+        - Models: reference/wyze_api/wyze_api_models.md
+      - IOTC API:
+          - WyzeIOTC: reference/iotc.md
+          - WyzeIOTCSession: reference/iotc_session.md
+          - WyzeIOTCSessionState: reference/iotc_session_state.md
+      - Low Level API (TUTK):
+          - tutk.py: reference/tutk/tutk.md
+          - tutk_ioctl_mux.py: reference/tutk/tutk_ioctl_mux.md
+          - tutk_protocol.py:
+            - Classes: reference/tutk/tutk_protocol.md
+            - Commands: reference/tutk/tutk_protocol_commands.md
