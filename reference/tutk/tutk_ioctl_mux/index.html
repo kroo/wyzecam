@@ -863,9 +863,9 @@ streaming audio or video data.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">tutk_platform_lib</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">av_chan_id</span> <span class="o">=</span> <span class="n">av_chan_id</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">queues</span><span class="p">:</span> <span class="n">DefaultDict</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">QUEUE_TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span>
-        <span class="n">Queue</span>
-    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">queues</span><span class="p">:</span> <span class="n">DefaultDict</span><span class="p">[</span>
+        <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="s2">&quot;Queue[Union[object, Tuple[int, int, int, bytes]]]&quot;</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">Queue</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">listener</span> <span class="o">=</span> <span class="n">TutkIOCtrlMuxListener</span><span class="p">(</span>
         <span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">av_chan_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">queues</span>
     <span class="p">)</span>
@@ -910,7 +910,7 @@ to the camera.</p>
       <tr>
         <td><code>msg</code></td>
         <td><code>TutkWyzeProtocolMessage</code></td>
-        <td><p>The message to send to the client. See <a href="/reference/tutk/tutk_protocol_commands/">tutk_protocol.py Commands</a></p></td>
+        <td><p>The message to send to the client. See <a href="../tutk_protocol_commands/">tutk_protocol.py Commands</a></p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -955,7 +955,7 @@ to the camera.</p>
 <span class="sd">    ```</span>
 
 <span class="sd">    :param msg: The message to send to the client. See</span>
-<span class="sd">                [tutk_protocol.py Commands](/reference/tutk/tutk_protocol_commands/)</span>
+<span class="sd">                [tutk_protocol.py Commands](../tutk_protocol_commands/)</span>
 <span class="sd">    :param ctrl_type: used internally by the iotc library, should always be</span>
 <span class="sd">                      `tutk.IOTYPE_USER_DEFINED_START`.</span>
 

@@ -602,7 +602,7 @@ keyword.  This allows us to automatically clean up after we're done with the ses
     <span class="k">with</span> <span class="n">iotc</span><span class="o">.</span><span class="n">connect_and_auth</span><span class="p">(</span><span class="n">account</span><span class="p">,</span> <span class="n">camera</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
         <span class="o">...</span>  <span class="c1"># send configuration commands, or stream video from the session.</span>
 </code></pre></div>
-<p>See <a href="/reference/iotc_session/">WyzeIOTCSession</a> for more info.</p>
+<p>See <a href="../iotc_session/">WyzeIOTCSession</a> for more info.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -640,7 +640,7 @@ keyword.  This allows us to automatically clean up after we're done with the ses
   <tbody>
     <tr>
       <td><code>WyzeIOTCSession</code></td>
-      <td><p>An object representing the Wyze IOTC Session, a <a href="/reference/iotc_session/">WyzeIOTCSession</a></p></td>
+      <td><p>An object representing the Wyze IOTC Session, a <a href="../iotc_session/">WyzeIOTCSession</a></p></td>
     </tr>
   </tbody>
 </table>
@@ -660,11 +660,11 @@ keyword.  This allows us to automatically clean up after we're done with the ses
 <span class="sd">            ...  # send configuration commands, or stream video from the session.</span>
 <span class="sd">    ```</span>
 
-<span class="sd">    See [WyzeIOTCSession](/reference/iotc_session/) for more info.</span>
+<span class="sd">    See [WyzeIOTCSession](../iotc_session/) for more info.</span>
 
 <span class="sd">    :param account: the account object returned from [wyzecam.api.get_user_info][]</span>
 <span class="sd">    :param camera: the camera object returned from [wyzecam.api.get_camera_list][]</span>
-<span class="sd">    :returns: An object representing the Wyze IOTC Session, a [WyzeIOTCSession](/reference/iotc_session/)</span>
+<span class="sd">    :returns: An object representing the Wyze IOTC Session, a [WyzeIOTCSession](../iotc_session/)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">WyzeIOTCSession</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">camera</span><span class="p">)</span>
 </code></pre></div>
