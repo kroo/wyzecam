@@ -1,0 +1,2633 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>tutk.py - WyzeCam Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wyzecam.tutk.tutk-attributes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="WyzeCam Documentation" class="md-header__button md-logo" aria-label="WyzeCam Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            WyzeCam Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              tutk.py
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="WyzeCam Documentation" class="md-nav__button md-logo" aria-label="WyzeCam Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    WyzeCam Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Code Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Code Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Code Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      <label class="md-nav__link" for="__nav_3_1">
+        Wyze API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Wyze API" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Wyze API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wyze_api/wyze_api_functions/" class="md-nav__link">
+        Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wyze_api/wyze_api_models/" class="md-nav__link">
+        Models
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_2">
+        IOTC API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="IOTC API" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          IOTC API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iotc/" class="md-nav__link">
+        WyzeIOTC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iotc_session/" class="md-nav__link">
+        WyzeIOTCSession
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iotc_session_state/" class="md-nav__link">
+        WyzeIOTCSessionState
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3_3">
+        Low Level API (TUTK)
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Low Level API (TUTK)" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Low Level API (TUTK)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          tutk.py
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        tutk.py
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk-attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_DATA_NOREADY" class="md-nav__link">
+    AV_ER_DATA_NOREADY
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_INCOMPLETE_FRAME" class="md-nav__link">
+    AV_ER_INCOMPLETE_FRAME
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_SESSION_CLOSE_BY_REMOTE" class="md-nav__link">
+    AV_ER_SESSION_CLOSE_BY_REMOTE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_TIMEOUT" class="md-nav__link">
+    AV_ER_TIMEOUT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_360P" class="md-nav__link">
+    BITRATE_360P
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_HD" class="md-nav__link">
+    BITRATE_HD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_SD" class="md-nav__link">
+    BITRATE_SD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_SUPER_HD" class="md-nav__link">
+    BITRATE_SUPER_HD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_SUPER_SUPER_HD" class="md-nav__link">
+    BITRATE_SUPER_SUPER_HD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.FRAME_SIZE_1080P" class="md-nav__link">
+    FRAME_SIZE_1080P
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.FRAME_SIZE_360P" class="md-nav__link">
+    FRAME_SIZE_360P
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.FrameInfoStruct" class="md-nav__link">
+    FrameInfoStruct
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.SInfoStruct" class="md-nav__link">
+    SInfoStruct
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_client_set_max_buf_size" class="md-nav__link">
+    av_client_set_max_buf_size()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_client_start" class="md-nav__link">
+    av_client_start()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_client_stop" class="md-nav__link">
+    av_client_stop()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_deinitialize" class="md-nav__link">
+    av_deinitialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_initialize" class="md-nav__link">
+    av_initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_recv_frame_data" class="md-nav__link">
+    av_recv_frame_data()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_recv_io_ctrl" class="md-nav__link">
+    av_recv_io_ctrl()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_connect_by_uid" class="md-nav__link">
+    iotc_connect_by_uid()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_deinitialize" class="md-nav__link">
+    iotc_deinitialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_get_version" class="md-nav__link">
+    iotc_get_version()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_initialize" class="md-nav__link">
+    iotc_initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_session_check" class="md-nav__link">
+    iotc_session_check()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_session_close" class="md-nav__link">
+    iotc_session_close()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_set_log_path" class="md-nav__link">
+    iotc_set_log_path()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.load_library" class="md-nav__link">
+    load_library()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutk_ioctl_mux/" class="md-nav__link">
+        tutk_ioctl_mux.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_3" type="checkbox" id="__nav_3_3_3" >
+      
+      <label class="md-nav__link" for="__nav_3_3_3">
+        tutk_protocol.py
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="tutk_protocol.py" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          tutk_protocol.py
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutk_protocol/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutk_protocol_commands/" class="md-nav__link">
+        Commands
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk-attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_DATA_NOREADY" class="md-nav__link">
+    AV_ER_DATA_NOREADY
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_INCOMPLETE_FRAME" class="md-nav__link">
+    AV_ER_INCOMPLETE_FRAME
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_SESSION_CLOSE_BY_REMOTE" class="md-nav__link">
+    AV_ER_SESSION_CLOSE_BY_REMOTE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.AV_ER_TIMEOUT" class="md-nav__link">
+    AV_ER_TIMEOUT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_360P" class="md-nav__link">
+    BITRATE_360P
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_HD" class="md-nav__link">
+    BITRATE_HD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_SD" class="md-nav__link">
+    BITRATE_SD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_SUPER_HD" class="md-nav__link">
+    BITRATE_SUPER_HD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.BITRATE_SUPER_SUPER_HD" class="md-nav__link">
+    BITRATE_SUPER_SUPER_HD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.FRAME_SIZE_1080P" class="md-nav__link">
+    FRAME_SIZE_1080P
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.FRAME_SIZE_360P" class="md-nav__link">
+    FRAME_SIZE_360P
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.FrameInfoStruct" class="md-nav__link">
+    FrameInfoStruct
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.SInfoStruct" class="md-nav__link">
+    SInfoStruct
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_client_set_max_buf_size" class="md-nav__link">
+    av_client_set_max_buf_size()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_client_start" class="md-nav__link">
+    av_client_start()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_client_stop" class="md-nav__link">
+    av_client_stop()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_deinitialize" class="md-nav__link">
+    av_deinitialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_initialize" class="md-nav__link">
+    av_initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_recv_frame_data" class="md-nav__link">
+    av_recv_frame_data()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.av_recv_io_ctrl" class="md-nav__link">
+    av_recv_io_ctrl()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_connect_by_uid" class="md-nav__link">
+    iotc_connect_by_uid()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_deinitialize" class="md-nav__link">
+    iotc_deinitialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_get_version" class="md-nav__link">
+    iotc_get_version()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_initialize" class="md-nav__link">
+    iotc_initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_session_check" class="md-nav__link">
+    iotc_session_check()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_session_close" class="md-nav__link">
+    iotc_session_close()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.iotc_set_log_path" class="md-nav__link">
+    iotc_set_log_path()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk.load_library" class="md-nav__link">
+    load_library()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>tutk.py</h1>
+                
+                <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h2 id="wyzecam.tutk.tutk-attributes">Attributes</h2>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.AV_ER_DATA_NOREADY" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">AV_ER_DATA_NOREADY</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>An error raised when the client asks for data not yet available on the camera.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.AV_ER_INCOMPLETE_FRAME" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">AV_ER_INCOMPLETE_FRAME</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>An error sent during video streaming if the camera wasn't able to send a complete frame.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.AV_ER_SESSION_CLOSE_BY_REMOTE" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">AV_ER_SESSION_CLOSE_BY_REMOTE</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>An error raised when the camera closes the connection.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.AV_ER_TIMEOUT" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">AV_ER_TIMEOUT</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>An error raised when the AV library times out.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.BITRATE_360P" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">BITRATE_360P</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The bitrate used by the "360P" setting in the app.  Approx 30 KB/s.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.BITRATE_HD" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">BITRATE_HD</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The bitrate used by the "HD" setting in the app.  Approx 120 KB/s.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.BITRATE_SD" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">BITRATE_SD</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The bitrate used by the "SD" setting in the app.  Approx 60 KB/s.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.BITRATE_SUPER_HD" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">BITRATE_SUPER_HD</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A bitrate higher than the "HD" setting in the app.  Approx 150 KB/s.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.BITRATE_SUPER_SUPER_HD" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">BITRATE_SUPER_SUPER_HD</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A bitrate higher than the "HD" setting in the app.  Approx 240 KB/s.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.FRAME_SIZE_1080P" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">FRAME_SIZE_1080P</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Represents the size of the video stream sent back from the server; 1080P
+or 1920x1080 pixels.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="wyzecam.tutk.tutk.FRAME_SIZE_360P" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">FRAME_SIZE_360P</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Represents the size of the video stream sent back from the server; 360P
+or 640x360 pixels.</p>
+    </div>
+
+  </div>
+
+
+
+
+<h2 id="wyzecam.tutk.tutk-classes">Classes</h2>
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="wyzecam.tutk.tutk.FrameInfoStruct" class="doc doc-heading">
+        <code>FrameInfoStruct</code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A struct recieved on every video frame, with lots of useful information
+about the frame sent by the camera.</p>
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>codec_id</code></td>
+        <td><code>int</code></td>
+        <td><p>78: h264 80: h265</p></td>
+      </tr>
+      <tr>
+        <td><code>is_keyframe</code></td>
+        <td><code>int</code></td>
+        <td><p>True if the frame being described is a keyframe</p></td>
+      </tr>
+      <tr>
+        <td><code>cam_index</code></td>
+        <td><code>int</code></td>
+        <td><p>The index of the camera</p></td>
+      </tr>
+      <tr>
+        <td><code>online_num</code></td>
+        <td><code>int</code></td>
+        <td><p>Not clear</p></td>
+      </tr>
+      <tr>
+        <td><code>framerate</code></td>
+        <td><code>int</code></td>
+        <td><p>framerate of the video frame, in frames / second</p></td>
+      </tr>
+      <tr>
+        <td><code>frame_size</code></td>
+        <td><code>int</code></td>
+        <td><p>frame size of the video frame, either <code>FRAME_SIZE_1080P</code> or <code>FRAME_SIZE_360P</code></p></td>
+      </tr>
+      <tr>
+        <td><code>bitrate</code></td>
+        <td><code>int</code></td>
+        <td><p>bitrate of the video frame, as configured.</p></td>
+      </tr>
+      <tr>
+        <td><code>timestamp_ms</code></td>
+        <td><code>int</code></td>
+        <td><p>the millisecond component of the timestamp.</p></td>
+      </tr>
+      <tr>
+        <td><code>timestamp</code></td>
+        <td><code>int</code></td>
+        <td><p>the seconds component of the timestamp.</p></td>
+      </tr>
+      <tr>
+        <td><code>frame_len</code></td>
+        <td><code>int</code></td>
+        <td><p>the size of the data sent by the camera, in bytes.</p></td>
+      </tr>
+      <tr>
+        <td><code>frame_num</code></td>
+        <td><code>int</code></td>
+        <td><p>the current frame number as recorded by the camera</p></td>
+      </tr>
+      <tr>
+        <td><code>ac_mac_addr</code></td>
+        <td><code>str</code></td>
+        <td><p>unknown</p></td>
+      </tr>
+      <tr>
+        <td><code>n_play_token</code></td>
+        <td><code>int</code></td>
+        <td><p>unknown</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="wyzecam.tutk.tutk.SInfoStruct" class="doc doc-heading">
+        <code>SInfoStruct</code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Result of iotc_session_check(), this struct holds a bunch of diagnostic
+data about the state of the connection to the camera.</p>
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mode</code></td>
+        <td><code>int</code></td>
+        <td><p>0: P2P mode, 1: Relay mode, 2: LAN mode</p></td>
+      </tr>
+      <tr>
+        <td><code>c_or_d</code></td>
+        <td><code>int</code></td>
+        <td><p>0: As a Client, 1: As a Device</p></td>
+      </tr>
+      <tr>
+        <td><code>uid</code></td>
+        <td><code>str</code></td>
+        <td><p>The UID of the device.</p></td>
+      </tr>
+      <tr>
+        <td><code>remote_ip</code></td>
+        <td><code>str</code></td>
+        <td><p>The IP address of remote site used during this IOTC session.</p></td>
+      </tr>
+      <tr>
+        <td><code>remote_port</code></td>
+        <td><code>int</code></td>
+        <td><p>The port number of remote site used during this IOTC session.</p></td>
+      </tr>
+      <tr>
+        <td><code>tx_packet_count</code></td>
+        <td><code>int</code></td>
+        <td><p>The total packets sent from the device and the client during this IOTC session.</p></td>
+      </tr>
+      <tr>
+        <td><code>rx_packet_count</code></td>
+        <td><code>int</code></td>
+        <td><p>The total packets received in the device and the client during this IOTC session</p></td>
+      </tr>
+      <tr>
+        <td><code>iotc_version</code></td>
+        <td><code>int</code></td>
+        <td><p>version number of the IOTC device.</p></td>
+      </tr>
+      <tr>
+        <td><code>vendor_id</code></td>
+        <td><code>int</code></td>
+        <td><p>id of the vendor of the device</p></td>
+      </tr>
+      <tr>
+        <td><code>product_id</code></td>
+        <td><code>int</code></td>
+        <td><p>id of the product of the device</p></td>
+      </tr>
+      <tr>
+        <td><code>group_id</code></td>
+        <td><code>int</code></td>
+        <td><p>id of the group of the device</p></td>
+      </tr>
+      <tr>
+        <td><code>nat_type</code></td>
+        <td><code>int</code></td>
+        <td><p>The remote NAT type.</p></td>
+      </tr>
+      <tr>
+        <td><code>is_secure</code></td>
+        <td><code>int</code></td>
+        <td><p>0: The IOTC session is in non-secure mode, 1: The IOTC session is in secure mode</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+    </div>
+
+  </div>
+
+
+
+<h2 id="wyzecam.tutk.tutk-functions">Functions</h2>
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.av_client_set_max_buf_size" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">av_client_set_max_buf_size</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Set the maximum video frame buffer used in AV client.</p>
+<p>AV client sets the maximum video frame buffer by this function. The size of
+video frame buffer will affect the streaming fluency. The default size of
+video frame buffer is 1MB.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>the c library loaded from the 'load_library' call.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>size</code></td>
+        <td><code>int</code></td>
+        <td><p>The maximum video frame buffer, in unit of kilo-byte</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">av_client_set_max_buf_size</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Set the maximum video frame buffer used in AV client.</span>
+
+<span class="sd">    AV client sets the maximum video frame buffer by this function. The size of</span>
+<span class="sd">    video frame buffer will affect the streaming fluency. The default size of</span>
+<span class="sd">    video frame buffer is 1MB.</span>
+
+<span class="sd">    :param tutk_platform_lib: the c library loaded from the &#39;load_library&#39; call.</span>
+<span class="sd">    :param size: The maximum video frame buffer, in unit of kilo-byte</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">avClientSetMaxBufSize</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.av_client_start" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">av_client_start</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">timeout_secs</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Start an AV client.</p>
+<p>Start an AV client by providing view account and password. It shall pass
+the authentication of the AV server before receiving AV data.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>the c library loaded from the 'load_library' call.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>session_id</code></td>
+        <td><code>Union[int, ctypes.c_int]</code></td>
+        <td><p>The session ID of the IOTC session to start AV client</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>username</code></td>
+        <td><code>bytes</code></td>
+        <td><p>The view account for authentication</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>password</code></td>
+        <td><code>bytes</code></td>
+        <td><p>The view password for authentication</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>timeout_secs</code></td>
+        <td><code>int</code></td>
+        <td><p>The timeout for this function in unit of second Specify it as 0 will make this AV client try connection once and this process will exit immediately if not connection is unsuccessful.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>channel_id</code></td>
+        <td><code>int</code></td>
+        <td><p>The channel ID of the channel to start AV client</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Tuple[ctypes.c_int, ctypes.c_uint]</code></td>
+      <td><p>returns a tuple of two values: - av_chan_id: AV channel ID if return value &gt;= 0; error code if return value &lt; 0 - pn_serv_type: The user-defined service type set when an AV server starts. Can be NULL.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">av_client_start</span><span class="p">(</span>
+    <span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">c_int</span><span class="p">],</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="n">timeout_secs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">c_int</span><span class="p">,</span> <span class="n">c_uint</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Start an AV client.</span>
+
+<span class="sd">    Start an AV client by providing view account and password. It shall pass</span>
+<span class="sd">    the authentication of the AV server before receiving AV data.</span>
+
+<span class="sd">    :param tutk_platform_lib: the c library loaded from the &#39;load_library&#39; call.</span>
+<span class="sd">    :param session_id: The session ID of the IOTC session to start AV client</span>
+<span class="sd">    :param username: The view account for authentication</span>
+<span class="sd">    :param password: The view password for authentication</span>
+<span class="sd">    :param timeout_secs: The timeout for this function in unit of second</span>
+<span class="sd">                         Specify it as 0 will make this AV client try connection once</span>
+<span class="sd">                         and this process will exit immediately if not connection</span>
+<span class="sd">                         is unsuccessful.</span>
+<span class="sd">    :param channel_id: The channel ID of the channel to start AV client</span>
+<span class="sd">    :return: returns a tuple of two values:</span>
+<span class="sd">             - av_chan_id: AV channel ID if return value &gt;= 0; error code if return value &lt; 0</span>
+<span class="sd">             - pn_serv_type: The user-defined service type set when an AV server starts. Can be NULL.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_timeout</span> <span class="o">=</span> <span class="n">c_uint</span><span class="p">(</span><span class="n">timeout_secs</span><span class="p">)</span>
+    <span class="n">user_defined_service_type</span> <span class="o">=</span> <span class="n">c_uint</span><span class="p">()</span>
+    <span class="n">chan_id</span> <span class="o">=</span> <span class="n">c_uint8</span><span class="p">(</span><span class="n">channel_id</span><span class="p">)</span>
+    <span class="n">av_chan_id</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">avClientStart</span><span class="p">(</span>
+        <span class="n">session_id</span><span class="p">,</span>
+        <span class="n">c_char_p</span><span class="p">(</span><span class="n">username</span><span class="p">),</span>
+        <span class="n">c_char_p</span><span class="p">(</span><span class="n">password</span><span class="p">),</span>
+        <span class="n">n_timeout</span><span class="p">,</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">user_defined_service_type</span><span class="p">),</span>
+        <span class="n">chan_id</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">av_chan_id</span><span class="p">,</span> <span class="n">user_defined_service_type</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.av_client_stop" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">av_client_stop</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">av_chan_id</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Stop an AV client.</p>
+<p>An AV client stop AV channel by this function if this channel is no longer
+required.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>the c library loaded from the 'load_library' call.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>av_chan_id</code></td>
+        <td><code>c_int</code></td>
+        <td><p>The channel ID of the AV channel to be stopped</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">av_client_stop</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">av_chan_id</span><span class="p">:</span> <span class="n">c_int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Stop an AV client.</span>
+
+<span class="sd">    An AV client stop AV channel by this function if this channel is no longer</span>
+<span class="sd">    required.</span>
+
+<span class="sd">    :param tutk_platform_lib: the c library loaded from the &#39;load_library&#39; call.</span>
+<span class="sd">    :param av_chan_id: The channel ID of the AV channel to be stopped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">avClientStop</span><span class="p">(</span><span class="n">av_chan_id</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.av_deinitialize" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">av_deinitialize</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Deinitialize AV module.</p>
+<p>This function will deinitialize AV module.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>The underlying c library (from tutk.load_library())</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>int</code></td>
+      <td><p>Error code if return value &lt; 0</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">av_deinitialize</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Deinitialize AV module.</span>
+
+<span class="sd">    This function will deinitialize AV module.</span>
+
+<span class="sd">    :param tutk_platform_lib: The underlying c library (from tutk.load_library())</span>
+<span class="sd">    :return: Error code if return value &lt; 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">errno</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">avDeInitialize</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">errno</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.av_initialize" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">av_initialize</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">max_num_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Initialize AV module.</p>
+<p>This function is used by AV servers or AV clients to initialize AV module
+and shall be called before any AV module related function is invoked.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>the c library loaded from the 'load_library' call.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>max_num_channels</code></td>
+        <td><code>Optional[int]</code></td>
+        <td><p>The max number of AV channels. If it is specified less than 1, AV will set max number of AV channels as 1.</p></td>
+        <td><code>1</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>int</code></td>
+      <td><p>The actual maximum number of AV channels to be set. Error code if return value &lt; 0.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">av_initialize</span><span class="p">(</span>
+    <span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">max_num_channels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Initialize AV module.</span>
+
+<span class="sd">    This function is used by AV servers or AV clients to initialize AV module</span>
+<span class="sd">    and shall be called before any AV module related function is invoked.</span>
+
+<span class="sd">    :param tutk_platform_lib: the c library loaded from the &#39;load_library&#39; call.</span>
+<span class="sd">    :param max_num_channels: The max number of AV channels. If it is specified</span>
+<span class="sd">                             less than 1, AV will set max number of AV channels as 1.</span>
+
+<span class="sd">    :return:The actual maximum number of AV channels to be set. Error code if return value &lt; 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_chans</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">avInitialize</span><span class="p">(</span><span class="n">max_num_channels</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_chans</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.av_recv_frame_data" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">av_recv_frame_data</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">av_chan_id</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A new version AV client receives frame data from an AV server.</p>
+<p>An AV client uses this function to receive frame data from AV server</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>the c library loaded from the 'load_library' call.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>av_chan_id</code></td>
+        <td><code>c_int</code></td>
+        <td><p>The channel ID of the AV channel to recv data on.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Tuple[int, Optional[bytes], Optional[wyzecam.tutk.tutk.FrameInfoStruct], Optional[int]]</code></td>
+      <td><p>a 4-tuple of errno, frame_data, frame_info, and frame_index</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">av_recv_frame_data</span><span class="p">(</span>
+    <span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">av_chan_id</span><span class="p">:</span> <span class="n">c_int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span>
+    <span class="nb">int</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FrameInfoStruct</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;A new version AV client receives frame data from an AV server.</span>
+
+<span class="sd">    An AV client uses this function to receive frame data from AV server</span>
+
+<span class="sd">    :param tutk_platform_lib: the c library loaded from the &#39;load_library&#39; call.</span>
+<span class="sd">    :param av_chan_id: The channel ID of the AV channel to recv data on.</span>
+<span class="sd">    :return: a 4-tuple of errno, frame_data, frame_info, and frame_index</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frame_data_max_len</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
+    <span class="n">frame_data_actual_len</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">()</span>
+    <span class="n">frame_data_expected_len</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">()</span>
+    <span class="n">frame_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_char</span> <span class="o">*</span> <span class="n">frame_data_max_len</span><span class="p">)()</span>
+    <span class="n">frame_info_actual_len</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">()</span>
+    <span class="n">frame_info</span> <span class="o">=</span> <span class="n">FrameInfoStruct</span><span class="p">()</span>
+    <span class="n">frame_info_max_len</span> <span class="o">=</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">FrameInfoStruct</span><span class="p">)</span>
+    <span class="n">frame_index</span> <span class="o">=</span> <span class="n">c_uint</span><span class="p">()</span>
+
+    <span class="n">errno</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">avRecvFrameData2</span><span class="p">(</span>
+        <span class="n">av_chan_id</span><span class="p">,</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">frame_data</span><span class="p">),</span>
+        <span class="n">c_int</span><span class="p">(</span><span class="n">frame_data_max_len</span><span class="p">),</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">frame_data_actual_len</span><span class="p">),</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">frame_data_expected_len</span><span class="p">),</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">frame_info</span><span class="p">),</span>
+        <span class="n">c_int</span><span class="p">(</span><span class="n">frame_info_max_len</span><span class="p">),</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">frame_info_actual_len</span><span class="p">),</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">frame_index</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">errno</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">errno</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">frame_data_actual</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">frame_data</span><span class="p">[:</span> <span class="n">frame_data_actual_len</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">frame_data_actual</span><span class="p">,</span>
+            <span class="n">frame_info</span><span class="p">,</span>
+            <span class="n">frame_index</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.av_recv_io_ctrl" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">av_recv_io_ctrl</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">av_chan_id</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Receive AV IO control.</p>
+<p>This function is used by AV servers or AV clients to receive a AV IO control.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>the c library loaded from the 'load_library' call.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>av_chan_id</code></td>
+        <td><code>c_int</code></td>
+        <td><p>The channel ID of the AV channel to be stopped</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>timeout_ms</code></td>
+        <td><code>int</code></td>
+        <td><p>the number of milliseconds to wait before timing out</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Tuple[int, int, Optional[List[bytes]]]</code></td>
+      <td><p>a tuple of (the length of the io_ctrl received (or error number), the io_ctrl_type, and the data in bytes)</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">av_recv_io_ctrl</span><span class="p">(</span>
+    <span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">av_chan_id</span><span class="p">:</span> <span class="n">c_int</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]]]:</span>
+    <span class="sd">&quot;&quot;&quot;Receive AV IO control.</span>
+
+<span class="sd">    This function is used by AV servers or AV clients to receive a AV IO control.</span>
+<span class="sd">    :param tutk_platform_lib: the c library loaded from the &#39;load_library&#39; call.</span>
+<span class="sd">    :param av_chan_id: The channel ID of the AV channel to be stopped</span>
+<span class="sd">    :param timeout_ms: the number of milliseconds to wait before timing out</span>
+<span class="sd">    :returns: a tuple of (the length of the io_ctrl received (or error number),</span>
+<span class="sd">              the io_ctrl_type, and the data in bytes)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pn_io_ctrl_type</span> <span class="o">=</span> <span class="n">c_uint</span><span class="p">()</span>
+    <span class="n">ctl_data_len</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
+    <span class="n">ctl_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_char</span> <span class="o">*</span> <span class="n">ctl_data_len</span><span class="p">)()</span>
+    <span class="n">actual_len</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">avRecvIOCtrl</span><span class="p">(</span>
+        <span class="n">av_chan_id</span><span class="p">,</span>
+        <span class="n">pointer</span><span class="p">(</span><span class="n">pn_io_ctrl_type</span><span class="p">),</span>
+        <span class="n">ctl_data</span><span class="p">,</span>
+        <span class="n">c_int</span><span class="p">(</span><span class="n">ctl_data_len</span><span class="p">),</span>
+        <span class="n">c_int</span><span class="p">(</span><span class="n">timeout_ms</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">actual_len</span><span class="p">,</span>
+        <span class="n">pn_io_ctrl_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">ctl_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">actual_len</span><span class="p">]</span> <span class="k">if</span> <span class="n">actual_len</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.iotc_connect_by_uid" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">iotc_connect_by_uid</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">p2p_id</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Used by a client to connect a device.</p>
+<p>This function is for a client to connect a device by specifying the UID of
+that device. If connection is established with the help of IOTC servers,
+the IOTC session ID will be returned in this function and then device and
+client can communicate for the other later by using this IOTC session ID.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>The underlying c library (from tutk.load_library())</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>p2p_id</code></td>
+        <td><code>str</code></td>
+        <td><p>The UID of a device that client wants to connect</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>c_int</code></td>
+      <td><p>IOTC session ID if return value &gt;= 0, error code if return value &lt; 0</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iotc_connect_by_uid</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">p2p_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">c_int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Used by a client to connect a device.</span>
+
+<span class="sd">    This function is for a client to connect a device by specifying the UID of</span>
+<span class="sd">    that device. If connection is established with the help of IOTC servers,</span>
+<span class="sd">    the IOTC session ID will be returned in this function and then device and</span>
+<span class="sd">    client can communicate for the other later by using this IOTC session ID.</span>
+
+<span class="sd">    :param tutk_platform_lib: The underlying c library (from tutk.load_library())</span>
+<span class="sd">    :param p2p_id: The UID of a device that client wants to connect</span>
+<span class="sd">    :return: IOTC session ID if return value &gt;= 0, error code if return value &lt; 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="n">c_int</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">IOTC_Connect_ByUID</span><span class="p">(</span>
+        <span class="n">c_char_p</span><span class="p">(</span><span class="n">p2p_id</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">session_id</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.iotc_deinitialize" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">iotc_deinitialize</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Deinitialize IOTC module.</p>
+<p>This function will deinitialize IOTC module.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>The underlying c library (from tutk.load_library())</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>c_int</code></td>
+      <td><p>Error code if return value &lt; 0</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iotc_deinitialize</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">c_int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Deinitialize IOTC module.</span>
+
+<span class="sd">    This function will deinitialize IOTC module.</span>
+
+<span class="sd">    :param tutk_platform_lib: The underlying c library (from tutk.load_library())</span>
+<span class="sd">    :return: Error code if return value &lt; 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">errno</span><span class="p">:</span> <span class="n">c_int</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">IOTC_DeInitialize</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">errno</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.iotc_get_version" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">iotc_get_version</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the version of IOTC module.</p>
+<p>This function returns the version of IOTC module.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iotc_get_version</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get the version of IOTC module.</span>
+
+<span class="sd">    This function returns the version of IOTC module.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">c_uint32</span><span class="p">()</span>
+    <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">IOTC_Get_Version</span><span class="p">(</span><span class="n">pointer</span><span class="p">(</span><span class="n">version</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">version</span><span class="o">.</span><span class="n">value</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.iotc_initialize" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">iotc_initialize</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">udp_port</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Initialize IOTC module.</p>
+<p>This function is used by devices or clients to initialize IOTC module and
+shall be called before any IOTC module related function is invoked except
+for IOTC_Set_Max_Session_Number().</p>
+<p>The different between this function and IOTC_Initialize() is this function
+uses following steps to connect masters (1) IP addresses of master (2) if
+fails to connect in step 1, resolve predefined domain name of masters (3)
+try to connect again with the resolved IP address of step 2 if IP is
+resolved successfully.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>The underlying c library (from tutk.load_library())</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>udp_port</code></td>
+        <td><code>int</code></td>
+        <td><p>Specify a UDP port. Random UDP port is used if it is specified as 0.</p></td>
+        <td><code>0</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>int</code></td>
+      <td><p>0 if successful, Error code if return value &lt; 0</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iotc_initialize</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">udp_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Initialize IOTC module.</span>
+
+<span class="sd">    This function is used by devices or clients to initialize IOTC module and</span>
+<span class="sd">    shall be called before any IOTC module related function is invoked except</span>
+<span class="sd">    for IOTC_Set_Max_Session_Number().</span>
+
+<span class="sd">    The different between this function and IOTC_Initialize() is this function</span>
+<span class="sd">    uses following steps to connect masters (1) IP addresses of master (2) if</span>
+<span class="sd">    fails to connect in step 1, resolve predefined domain name of masters (3)</span>
+<span class="sd">    try to connect again with the resolved IP address of step 2 if IP is</span>
+<span class="sd">    resolved successfully.</span>
+
+<span class="sd">    :param tutk_platform_lib: The underlying c library (from tutk.load_library())</span>
+<span class="sd">    :param udp_port: Specify a UDP port. Random UDP port is used if it is specified as 0.</span>
+<span class="sd">    :return: 0 if successful, Error code if return value &lt; 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">errno</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">IOTC_Initialize2</span><span class="p">(</span><span class="n">udp_port</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">errno</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.iotc_session_check" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">iotc_session_check</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Used by a device or a client to check the IOTC session info.</p>
+<p>A device or a client may use this function to check if the IOTC session is
+still alive as well as getting the IOTC session info.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>The underlying c library (from tutk.load_library())</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>session_id</code></td>
+        <td><code>c_int</code></td>
+        <td><p>The session ID of the IOTC session to be checked</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Tuple[int, wyzecam.tutk.tutk.SInfoStruct]</code></td>
+      <td><p>The session info of specified IOTC session</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iotc_session_check</span><span class="p">(</span>
+    <span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="n">c_int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">SInfoStruct</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Used by a device or a client to check the IOTC session info.</span>
+
+<span class="sd">    A device or a client may use this function to check if the IOTC session is</span>
+<span class="sd">    still alive as well as getting the IOTC session info.</span>
+
+<span class="sd">    :param tutk_platform_lib: The underlying c library (from tutk.load_library())</span>
+<span class="sd">    :param session_id: The session ID of the IOTC session to be checked</span>
+<span class="sd">    :return: The session info of specified IOTC session</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sess_info</span> <span class="o">=</span> <span class="n">SInfoStruct</span><span class="p">()</span>
+    <span class="n">err_code</span> <span class="o">=</span> <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">IOTC_Session_Check</span><span class="p">(</span>
+        <span class="n">session_id</span><span class="p">,</span> <span class="n">pointer</span><span class="p">(</span><span class="n">sess_info</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">err_code</span><span class="p">,</span> <span class="n">sess_info</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.iotc_session_close" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">iotc_session_close</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Used by a device or a client to close a IOTC session.</p>
+<p>A device or a client uses this function to close a IOTC session specified
+by its session ID if this IOTC session is no longer required.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>tutk_platform_lib</code></td>
+        <td><code>CDLL</code></td>
+        <td><p>the c library loaded from the 'load_library' call.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>session_id</code></td>
+        <td><code>c_int</code></td>
+        <td><p>The session ID of the IOTC session to start AV client</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iotc_session_close</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="n">c_int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Used by a device or a client to close a IOTC session.</span>
+
+<span class="sd">    A device or a client uses this function to close a IOTC session specified</span>
+<span class="sd">    by its session ID if this IOTC session is no longer required.</span>
+
+<span class="sd">    :param tutk_platform_lib: the c library loaded from the &#39;load_library&#39; call.</span>
+<span class="sd">    :param session_id: The session ID of the IOTC session to start AV client</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">IOTC_Session_Close</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.iotc_set_log_path" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">iotc_set_log_path</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Set path of log file.</p>
+<p>Set the absolute path of log file</p>
+
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iotc_set_log_path</span><span class="p">(</span><span class="n">tutk_platform_lib</span><span class="p">:</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Set path of log file.</span>
+
+<span class="sd">    Set the absolute path of log file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tutk_platform_lib</span><span class="o">.</span><span class="n">IOTC_Set_Log_Path</span><span class="p">(</span>
+        <span class="n">c_char_p</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)),</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="wyzecam.tutk.tutk.load_library" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">load_library</span><span class="p">(</span><span class="n">shared_lib_path</span><span class="o">=</span><span class="s1">&#39;/usr/local/lib/libIOTCAPIs_ALL.dylib&#39;</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Load the underlying iotc library</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>shared_lib_path</code></td>
+        <td><code>str</code></td>
+        <td><p>the path to the shared library libIOTCAPIs_ALL</p></td>
+        <td><code>&#39;/usr/local/lib/libIOTCAPIs_ALL.dylib&#39;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>CDLL</code></td>
+      <td><p>the tutk_platform_lib, suitable for passing to other functions in this module</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_library</span><span class="p">(</span>
+    <span class="n">shared_lib_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/usr/local/lib/libIOTCAPIs_ALL.dylib&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CDLL</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load the underlying iotc library</span>
+
+<span class="sd">    :param shared_lib_path: the path to the shared library libIOTCAPIs_ALL</span>
+<span class="sd">    :return: the tutk_platform_lib, suitable for passing to other functions in this module</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="n">shared_lib_path</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../../iotc_session_state/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              WyzeIOTCSessionState
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../tutk_ioctl_mux/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              tutk_ioctl_mux.py
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>

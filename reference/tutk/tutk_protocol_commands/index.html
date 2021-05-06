@@ -1,0 +1,1444 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>Commands - WyzeCam Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tutk_protocolpy-commands" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="WyzeCam Documentation" class="md-header__button md-logo" aria-label="WyzeCam Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            WyzeCam Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Commands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="WyzeCam Documentation" class="md-nav__button md-logo" aria-label="WyzeCam Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    WyzeCam Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Code Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Code Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Code Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      <label class="md-nav__link" for="__nav_3_1">
+        Wyze API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Wyze API" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Wyze API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wyze_api/wyze_api_functions/" class="md-nav__link">
+        Functions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wyze_api/wyze_api_models/" class="md-nav__link">
+        Models
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_2">
+        IOTC API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="IOTC API" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          IOTC API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iotc/" class="md-nav__link">
+        WyzeIOTC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iotc_session/" class="md-nav__link">
+        WyzeIOTCSession
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iotc_session_state/" class="md-nav__link">
+        WyzeIOTCSessionState
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3_3">
+        Low Level API (TUTK)
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Low Level API (TUTK)" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Low Level API (TUTK)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutk/" class="md-nav__link">
+        tutk.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutk_ioctl_mux/" class="md-nav__link">
+        tutk_ioctl_mux.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_3" type="checkbox" id="__nav_3_3_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3_3_3">
+        tutk_protocol.py
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="tutk_protocol.py" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          tutk_protocol.py
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutk_protocol/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Commands
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Commands
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10000ConnectRequest" class="md-nav__link">
+    K10000ConnectRequest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10002ConnectAuth" class="md-nav__link">
+    K10002ConnectAuth
+  </a>
+  
+    <nav class="md-nav" aria-label="K10002ConnectAuth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10002ConnectAuth-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10002ConnectAuth.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth" class="md-nav__link">
+    K10008ConnectUserAuth
+  </a>
+  
+    <nav class="md-nav" aria-label="K10008ConnectUserAuth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10010ControlChannel" class="md-nav__link">
+    K10010ControlChannel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10020CheckCameraInfo" class="md-nav__link">
+    K10020CheckCameraInfo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10056SetResolvingBit" class="md-nav__link">
+    K10056SetResolvingBit
+  </a>
+  
+    <nav class="md-nav" aria-label="K10056SetResolvingBit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10056SetResolvingBit-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10056SetResolvingBit.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10620CheckNight" class="md-nav__link">
+    K10620CheckNight
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10640GetSpotlightStatus" class="md-nav__link">
+    K10640GetSpotlightStatus
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10000ConnectRequest" class="md-nav__link">
+    K10000ConnectRequest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10002ConnectAuth" class="md-nav__link">
+    K10002ConnectAuth
+  </a>
+  
+    <nav class="md-nav" aria-label="K10002ConnectAuth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10002ConnectAuth-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10002ConnectAuth.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth" class="md-nav__link">
+    K10008ConnectUserAuth
+  </a>
+  
+    <nav class="md-nav" aria-label="K10008ConnectUserAuth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10010ControlChannel" class="md-nav__link">
+    K10010ControlChannel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10020CheckCameraInfo" class="md-nav__link">
+    K10020CheckCameraInfo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10056SetResolvingBit" class="md-nav__link">
+    K10056SetResolvingBit
+  </a>
+  
+    <nav class="md-nav" aria-label="K10056SetResolvingBit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10056SetResolvingBit-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10056SetResolvingBit.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10620CheckNight" class="md-nav__link">
+    K10620CheckNight
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wyzecam.tutk.tutk_protocol.K10640GetSpotlightStatus" class="md-nav__link">
+    K10640GetSpotlightStatus
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="tutk_protocolpy-commands">tutk_protocol.py Commands</h1>
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10000ConnectRequest" class="doc doc-heading">
+        <code>K10000ConnectRequest</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>The "connect request" sent by a client to a camera when the client first connects.  This command
+initiates the handshake that authenticates the client to the camera.</p>
+<p>The expected response to this command is <code>10001</code>, in which the camera provides a set of 16 random
+bytes for the client to sign with the 'enr' of the camera.</p>
+
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10002ConnectAuth" class="doc doc-heading">
+        <code>K10002ConnectAuth</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>The "challenge response" sent by a client to a camera as part of the authentication handshake when
+the client first connects.  This command is deprecated, and is replaced by
+<a href="#wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth">K10008ConnectUserAuth</a> on newer devices.  We
+need to continue supporting this for older firmwares, however.</p>
+<p>The expected response to this command is <code>10003</code>, in which the camera provides a json object
+with the result of the authentication exchange (and if successful, a bunch of device information).</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="wyzecam.tutk.tutk_protocol.K10002ConnectAuth-methods">Methods</h3>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="wyzecam.tutk.tutk_protocol.K10002ConnectAuth.__init__" class="doc doc-heading">
+<code class="codehilite language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">challenge_response</span><span class="p">,</span> <span class="n">mac</span><span class="p">,</span> <span class="n">open_video</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">open_audio</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Constructs a new K10002ConnectAuth message</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>challenge_response</code></td>
+        <td><code>bytes</code></td>
+        <td><p>the xxtea-encrypted response to the challenge bytes recieved as part of message 10001.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>mac</code></td>
+        <td><code>str</code></td>
+        <td><p>the mac address of the camera</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>open_video</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if we wish to start streaming video after authentication is successful.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>open_audio</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if we wish to start streaming audio after authentication is successful.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk_protocol.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">challenge_response</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="n">mac</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">open_video</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">open_audio</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs a new K10002ConnectAuth message</span>
+
+<span class="sd">    :param challenge_response: the xxtea-encrypted response to the challenge bytes</span>
+<span class="sd">                               recieved as part of message 10001.</span>
+<span class="sd">    :param mac: the mac address of the camera</span>
+<span class="sd">    :param open_video: True if we wish to start streaming video after authentication is successful.</span>
+<span class="sd">    :param open_audio: True if we wish to start streaming audio after authentication is successful.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">10002</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">challenge_response</span><span class="p">)</span> <span class="o">==</span> <span class="mi">16</span>
+    <span class="p">),</span> <span class="s2">&quot;expected challenge response to be 16 bytes long&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mac</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">mac</span> <span class="o">=</span> <span class="n">mac</span> <span class="o">+</span> <span class="s2">&quot;1234&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">challenge_response</span> <span class="o">=</span> <span class="n">challenge_response</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">mac</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">open_video</span> <span class="o">=</span> <span class="n">open_video</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">open_audio</span> <span class="o">=</span> <span class="n">open_audio</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth" class="doc doc-heading">
+        <code>K10008ConnectUserAuth</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>The "challenge response" sent by a client to a camera as part of the authentication handshake when
+the client first connects.  This command is a newer version of
+<a href="#wyzecam.tutk.tutk_protocol.K10002ConnectAuth">K10008ConnectUserAuth</a>, and it sends the 'open_user_id'
+as part of the authentication response.</p>
+<p>The expected response to this command is <code>10009</code>, in which the camera provides a json object
+with the result of the authentication exchange (and if successful, a bunch of device information).</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth-methods">Methods</h3>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="wyzecam.tutk.tutk_protocol.K10008ConnectUserAuth.__init__" class="doc doc-heading">
+<code class="codehilite language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">challenge_response</span><span class="p">,</span> <span class="n">phone_id</span><span class="p">,</span> <span class="n">open_userid</span><span class="p">,</span> <span class="n">open_video</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">open_audio</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Constructs a new K10008ConnectAuth message</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>challenge_response</code></td>
+        <td><code>bytes</code></td>
+        <td><p>the xxtea-encrypted response to the challenge bytes recieved as part of message 10001.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>phone_id</code></td>
+        <td><code>str</code></td>
+        <td><p>the phone id of the client</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>open_userid</code></td>
+        <td><code>str</code></td>
+        <td><p>the open_user_id associated with the user authenticating.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>open_video</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if we wish to start streaming video after authentication is successful.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>open_audio</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if we wish to start streaming audio after authentication is successful.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk_protocol.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">challenge_response</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="n">phone_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">open_userid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">open_video</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">open_audio</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs a new K10008ConnectAuth message</span>
+
+<span class="sd">    :param challenge_response: the xxtea-encrypted response to the challenge bytes</span>
+<span class="sd">                               recieved as part of message 10001.</span>
+<span class="sd">    :param phone_id: the phone id of the client</span>
+<span class="sd">    :param open_userid: the open_user_id associated with the user authenticating.</span>
+<span class="sd">    :param open_video: True if we wish to start streaming video after authentication is successful.</span>
+<span class="sd">    :param open_audio: True if we wish to start streaming audio after authentication is successful.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">10008</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">challenge_response</span><span class="p">)</span> <span class="o">==</span> <span class="mi">16</span>
+    <span class="p">),</span> <span class="s2">&quot;expected challenge response to be 16 bytes long&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">phone_id</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">phone_id</span> <span class="o">=</span> <span class="n">phone_id</span> <span class="o">+</span> <span class="s2">&quot;1234&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">challenge_response</span> <span class="o">=</span> <span class="n">challenge_response</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">phone_id</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">open_userid</span> <span class="o">=</span> <span class="n">open_userid</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">open_video</span> <span class="o">=</span> <span class="n">open_video</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">open_audio</span> <span class="o">=</span> <span class="n">open_audio</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10010ControlChannel" class="doc doc-heading">
+        <code>K10010ControlChannel</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>A command used frequently by the mobile app to configure settings on the camera.</p>
+<p>Not terribly well understood.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10020CheckCameraInfo" class="doc doc-heading">
+        <code>K10020CheckCameraInfo</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>A command used to read the current settings of the camera.</p>
+<p>Not terribly well understood.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10056SetResolvingBit" class="doc doc-heading">
+        <code>K10056SetResolvingBit</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>A message used to set the resolution and bitrate of the camera.</p>
+<p>This is sent automatically after the authentication handshake completes successfully.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h3 id="wyzecam.tutk.tutk_protocol.K10056SetResolvingBit-methods">Methods</h3>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="wyzecam.tutk.tutk_protocol.K10056SetResolvingBit.__init__" class="doc doc-heading">
+<code class="codehilite language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bitrate</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Construct a K10056SetResolvingBit message, with a given frame size and bitrate.</p>
+<p>Possible frame sizes are:</p>
+<ul>
+<li><code>tutk.FRAME_SIZE_1080P</code>: 1080P, or 1920 x 1080</li>
+<li><code>tutk.FRAME_SIZE_360P</code>: 360P, or 640 x 360</li>
+</ul>
+<p>Possible bit rates are:</p>
+<ul>
+<li><code>tutk.BITRATE_360P</code>: the bitrate chosen when selecting '360P' in the app; 30 KB/s</li>
+<li><code>tutk.BITRATE_SD</code>: the bitrate chosen when selecting 'SD' in the app; 60 KB/s</li>
+<li><code>tutk.BITRATE_HD</code>: the bitrate chosen when selecting 'HD' in the app; 120 KB/s</li>
+<li><code>tutk.BITRATE_SUPER_HD</code>: an even higher bitrate than ever asked for by the app; 150 KB/s</li>
+<li><code>tutk.BITRATE_SUPER_SUPER_HD</code>: an even higher bitrate than ever asked for by the app; 240 KB/s</li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>frame_size</code></td>
+        <td><code></code></td>
+        <td><p>the dimensions of the video to stream.</p></td>
+        <td><code>0</code></td>
+      </tr>
+      <tr>
+        <td><code>bitrate</code></td>
+        <td><code></code></td>
+        <td><p>the bit rate, in KB/s to target in the h264/h265 encoder.</p></td>
+        <td><code>120</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wyzecam/tutk/tutk_protocol.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">frame_size</span><span class="o">=</span><span class="n">tutk</span><span class="o">.</span><span class="n">FRAME_SIZE_1080P</span><span class="p">,</span> <span class="n">bitrate</span><span class="o">=</span><span class="n">tutk</span><span class="o">.</span><span class="n">BITRATE_HD</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct a K10056SetResolvingBit message, with a given frame size and bitrate.</span>
+
+<span class="sd">    Possible frame sizes are:</span>
+
+<span class="sd">     - `tutk.FRAME_SIZE_1080P`: 1080P, or 1920 x 1080</span>
+<span class="sd">     - `tutk.FRAME_SIZE_360P`: 360P, or 640 x 360</span>
+
+<span class="sd">    Possible bit rates are:</span>
+
+<span class="sd">     - `tutk.BITRATE_360P`: the bitrate chosen when selecting &#39;360P&#39; in the app; 30 KB/s</span>
+<span class="sd">     - `tutk.BITRATE_SD`: the bitrate chosen when selecting &#39;SD&#39; in the app; 60 KB/s</span>
+<span class="sd">     - `tutk.BITRATE_HD`: the bitrate chosen when selecting &#39;HD&#39; in the app; 120 KB/s</span>
+<span class="sd">     - `tutk.BITRATE_SUPER_HD`: an even higher bitrate than ever asked for by the app; 150 KB/s</span>
+<span class="sd">     - `tutk.BITRATE_SUPER_SUPER_HD`: an even higher bitrate than ever asked for by the app; 240 KB/s</span>
+
+<span class="sd">    :param frame_size: the dimensions of the video to stream.</span>
+<span class="sd">    :param bitrate: the bit rate, in KB/s to target in the h264/h265 encoder.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">10056</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">frame_size</span> <span class="o">=</span> <span class="n">frame_size</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bitrate</span> <span class="o">=</span> <span class="n">bitrate</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10620CheckNight" class="doc doc-heading">
+        <code>K10620CheckNight</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>A message used to check the night mode settings of the camera.</p>
+<p>Not terribly well understood.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="wyzecam.tutk.tutk_protocol.K10640GetSpotlightStatus" class="doc doc-heading">
+        <code>K10640GetSpotlightStatus</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>A message used to check the spotlight settings of the camera.</p>
+<p>Not terribly well understood.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../tutk_protocol/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Classes
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>
