@@ -33,7 +33,7 @@ class TutkIOCtrlFuture:
         self,
         req: TutkWyzeProtocolMessage,
         queue: Optional[
-            Queue[Union[object, Tuple[int, int, int, bytes]]]
+            "Queue[Union[object, Tuple[int, int, int, bytes]]]"
         ] = None,
         errcode: Optional[c_int] = None,
     ):
@@ -116,7 +116,7 @@ class TutkIOCtrlMux:
         self.tutk_platform_lib = tutk_platform_lib
         self.av_chan_id = av_chan_id
         self.queues: DefaultDict[
-            Union[str, int], Queue[Union[object, Tuple[int, int, int, bytes]]]
+            Union[str, int], "Queue[Union[object, Tuple[int, int, int, bytes]]]"
         ] = defaultdict(Queue)
         self.listener = TutkIOCtrlMuxListener(
             tutk_platform_lib, av_chan_id, self.queues
@@ -261,7 +261,7 @@ class TutkIOCtrlMuxListener(threading.Thread):
         tutk_platform_lib: CDLL,
         av_chan_id: c_int,
         queues: DefaultDict[
-            Union[int, str], Queue[Union[object, Tuple[int, int, int, bytes]]]
+            Union[int, str], "Queue[Union[object, Tuple[int, int, int, bytes]]]"
         ],
     ):
         super().__init__()
