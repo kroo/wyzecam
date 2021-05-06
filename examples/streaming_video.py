@@ -1,11 +1,16 @@
 import os
 
-import cv2
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 from wyzecam import get_camera_list, get_user_info, login
 from wyzecam.iotc import WyzeIOTC
 
 
 def main():
+    assert cv2, "missing opencv-python, required for this example"
+
     assert os.environ["WYZE_EMAIL"], "missing WYZE_EMAIL"
     assert os.environ["WYZE_PASSWORD"], "missing WYZE_PASSWORD"
     auth_info = login(os.environ["WYZE_EMAIL"], os.environ["WYZE_PASSWORD"])

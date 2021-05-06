@@ -1,7 +1,15 @@
 import time
 
-import av
-import cv2
+try:
+    import av
+except ImportError:
+    av = None
+
+try:
+    import cv2
+except ImportError:
+    cv2 = None
+
 from wyzecam.tutk import tutk
 from wyzecam.tutk.tutk_ioctl_mux import TutkIOCtrlMux
 from wyzecam.tutk.tutk_protocol import (
@@ -13,6 +21,9 @@ from wyzecam.tutk.tutk_protocol import (
 
 
 def main(current_camera):
+    assert av, "missing PyAV, required for this example"
+    assert cv2, "missing opencv-python, required for this example"
+
     p2p_id = current_camera["p2p_id"]
     enr = current_camera["enr"]
     mac = current_camera["mac"]
