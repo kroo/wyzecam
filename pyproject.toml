@@ -33,9 +33,6 @@ classifiers = [# Update me
 python = "^3.8"
 importlib_metadata = { version = "^1.6.0", python = "<3.8" }
 pydantic = "^1.8.1"
-av = { version = "^8.0.3", optional = true }
-numpy = { version = "^1.20.2", optional = true }
-opencv-python = { version = "^4.5", optional = true }
 
 [tool.poetry.dev-dependencies]
 darglint = "^1.5.8"
@@ -55,6 +52,10 @@ mkdocstrings = "^0.15.0"
 ipython = "^7.23.1"
 matplotlib = "^3.4.1"
 mkdocs-autorefs = ">0.1,<0.2"
+
+av = { version = "^8.0.3", optional = true }
+numpy = { version = "^1.20.2", optional = true }
+opencv-python = { version = "^4.5", optional = true }
 
 [tool.black]
 # https://github.com/psf/black
