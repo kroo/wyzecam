@@ -73,7 +73,7 @@ cp libIOTCAPIs_ALL.dylib /usr/local/lib/
 ```bash
 unzip TUTK_IOTC_Platform_14W42P1.zip
 cd Lib/Linux/x64/
-g++ -fpic -shared -Wl,-whole-archive libAVAPIs.a libIOTCAPIs.a -o libIOTCAPIs_ALL.so
+g++ -fpic -shared -Wl,--whole-archive libAVAPIs.a libIOTCAPIs.a -Wl,--no-whole-archive -o libIOTCAPIs_ALL.so
 cp libIOTCAPIs_ALL.so /usr/local/lib/
 ```
 
