@@ -78,11 +78,97 @@ AV_ER_INCOMPLETE_FRAME = -20013
 An error sent during video streaming if the camera wasn't able to send a complete frame.
 """
 
+AV_ER_LOSED_THIS_FRAME = -20014
+"""
+An error sent during video streaming if the frame was lost in transmission.
+"""
+
 project_root = pathlib.Path(__file__).parent
 
 
 class TutkError(RuntimeError):
-    pass
+    name_mapping = {
+        -1: "IOTC_ER_SERVER_NOT_RESPONSE",
+        -2: "IOTC_ER_FAIL_RESOLVE_HOSTNAME",
+        -3: "IOTC_ER_ALREADY_INITIALIZED",
+        -4: "IOTC_ER_FAIL_CREATE_MUTEX",
+        -5: "IOTC_ER_FAIL_CREATE_THREAD",
+        -6: "IOTC_ER_FAIL_CREATE_SOCKET",
+        -7: "IOTC_ER_FAIL_SOCKET_OPT",
+        -8: "IOTC_ER_FAIL_SOCKET_BIND",
+        -10: "IOTC_ER_UNLICENSE",
+        -11: "IOTC_ER_LOGIN_ALREADY_CALLED",
+        -12: "IOTC_ER_NOT_INITIALIZED",
+        -13: "IOTC_ER_TIMEOUT",
+        -14: "IOTC_ER_INVALID_SID",
+        -15: "IOTC_ER_UNKNOWN_DEVICE",
+        -16: "IOTC_ER_FAIL_GET_LOCAL_IP",
+        -17: "IOTC_ER_LISTEN_ALREADY_CALLED",
+        -18: "IOTC_ER_EXCEED_MAX_SESSION",
+        -19: "IOTC_ER_CAN_NOT_FIND_DEVICE",
+        -20: "IOTC_ER_CONNECT_IS_CALLING",
+        -22: "IOTC_ER_SESSION_CLOSE_BY_REMOTE",
+        -23: "IOTC_ER_REMOTE_TIMEOUT_DISCONNECT",
+        -24: "IOTC_ER_DEVICE_NOT_LISTENING",
+        -26: "IOTC_ER_CH_NOT_ON",
+        -27: "IOTC_ER_FAIL_CONNECT_SEARCH",
+        -28: "IOTC_ER_MASTER_TOO_FEW",
+        -29: "IOTC_ER_AES_CERTIFY_FAIL",
+        -31: "IOTC_ER_SESSION_NO_FREE_CHANNEL",
+        -32: "IOTC_ER_TCP_TRAVEL_FAILED",
+        -33: "IOTC_ER_TCP_CONNECT_TO_SERVER_FAILED",
+        -34: "IOTC_ER_CLIENT_NOT_SECURE_MODE",
+        -35: "IOTC_ER_CLIENT_SECURE_MODE",
+        -36: "IOTC_ER_DEVICE_NOT_SECURE_MODE",
+        -37: "IOTC_ER_DEVICE_SECURE_MODE",
+        -38: "IOTC_ER_INVALID_MODE",
+        -39: "IOTC_ER_EXIT_LISTEN",
+        -40: "IOTC_ER_NO_PERMISSION",
+        -41: "IOTC_ER_NETWORK_UNREACHABLE",
+        -42: "IOTC_ER_FAIL_SETUP_RELAY",
+        -43: "IOTC_ER_NOT_SUPPORT_RELAY",
+        -44: "IOTC_ER_NO_SERVER_LIST",
+        -45: "IOTC_ER_DEVICE_MULTI_LOGIN",
+        -46: "IOTC_ER_INVALID_ARG",
+        -47: "IOTC_ER_NOT_SUPPORT_PE",
+        -48: "IOTC_ER_DEVICE_EXCEED_MAX_SESSION",
+        -20000: "AV_ER_INVALID_ARG",
+        -20001: "AV_ER_BUFPARA_MAXSIZE_INSUFF",
+        -20002: "AV_ER_EXCEED_MAX_CHANNEL",
+        -20003: "AV_ER_MEM_INSUFF",
+        -20004: "AV_ER_FAIL_CREATE_THREAD",
+        -20005: "AV_ER_EXCEED_MAX_ALARM",
+        -20006: "AV_ER_EXCEED_MAX_SIZE",
+        -20007: "AV_ER_SERV_NO_RESPONSE",
+        -20008: "AV_ER_CLIENT_NO_AVLOGIN",
+        -20009: "AV_ER_WRONG_VIEWACCorPWD",
+        -20010: "AV_ER_INVALID_SID",
+        -20011: "AV_ER_TIMEOUT",
+        -20012: "AV_ER_DATA_NOREADY",
+        -20013: "AV_ER_INCOMPLETE_FRAME",
+        -20014: "AV_ER_LOSED_THIS_FRAME",
+        -20015: "AV_ER_SESSION_CLOSE_BY_REMOTE",
+        -20016: "AV_ER_REMOTE_TIMEOUT_DISCONNECT",
+        -20017: "AV_ER_SERVER_EXIT",
+        -20018: "AV_ER_CLIENT_EXIT",
+        -20019: "AV_ER_NOT_INITIALIZED",
+        -20020: "AV_ER_CLIENT_NOT_SUPPORT",
+        -20021: "AV_ER_SENDIOCTRL_ALREADY_CALLED",
+        -20022: "AV_ER_SENDIOCTRL_EXIT",
+        -20023: "AV_ER_NO_PERMISSION",
+        -20024: "AV_ER_WRONG_ACCPWD_LENGTH",
+    }
+
+    def __init__(self, code):
+        super().__init__(code)
+        self.code = code
+
+    @property
+    def name(self):
+        return TutkError.name_mapping.get(self.code, self.code)
+
+    def __str__(self):
+        return self.name
 
 
 class FormattedStructure(Structure):
@@ -188,8 +274,8 @@ class FrameInfoStruct(FormattedStructure):
     :vartype timestamp: int
     :var frame_len: the size of the data sent by the camera, in bytes.
     :vartype frame_len: int
-    :var frame_num: the current frame number as recorded by the camera
-    :vartype frame_num: int
+    :var frame_no: the current frame number as recorded by the camera
+    :vartype frame_no: int
     :var ac_mac_addr: unknown
     :vartype ac_mac_addr: str
     :var n_play_token: unknown
@@ -449,6 +535,39 @@ def iotc_connect_by_uid(tutk_platform_lib: CDLL, p2p_id: str) -> c_int:
         c_char_p(p2p_id.encode("ascii"))
     )
     return session_id
+
+
+def iotc_get_session_id(tutk_platform_lib: CDLL) -> c_int:
+    """Used by a client to get a tutk_platform_free session ID.
+
+    This function is for a client to get a tutk_platform_free
+    session ID used for a parameter of iotc_connect_by_uid_parallel()
+    """
+    session_id: c_int = tutk_platform_lib.IOTC_Get_SessionID()
+    return session_id
+
+
+def iotc_connect_by_uid_parallel(
+    tutk_platform_lib: CDLL, p2p_id: str, session_id: c_int
+) -> c_int:
+    """Used by a client to connect a device and bind to a specified session ID.
+
+    This function is for a client to connect a device by specifying the UID of that device,
+    and bind to a tutk_platform_free session ID from IOTC_Get_SessionID(). If connection is
+    established with the help of IOTC servers, the IOTC_ER_NoERROR will be returned in this
+    function and then device and client can communicate for the other later by using this
+    IOTC session ID. If this function is called by multiple threads, the connections will
+    be processed concurrently.
+
+    :param tutk_platform_lib: The underlying c library (from tutk.load_library())
+    :param p2p_id: The UID of a device that client wants to connect
+    :param session_id: The Session ID got from IOTC_Get_SessionID() the connection should bind to.
+    :return: IOTC session ID if return value >= 0, error code if return value < 0
+    """
+    resultant_session_id: c_int = tutk_platform_lib.IOTC_Connect_ByUID(
+        c_char_p(p2p_id.encode("ascii")), session_id
+    )
+    return resultant_session_id
 
 
 def iotc_set_log_path(tutk_platform_lib: CDLL, path: str) -> None:

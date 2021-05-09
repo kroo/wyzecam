@@ -165,14 +165,17 @@ class WyzeIOTCSessionState(enum.IntEnum):
     CONNECTED = 3
     """Fully connected to the camera, but have not yet attempted to authenticate"""
 
-    AUTHENTICATING = 4
+    CONNECTING_FAILED = 4
+    """Connection failed, no longer connected"""
+
+    AUTHENTICATING = 5
     """Attempting to authenticate"""
 
-    AUTHENTICATION_SUCCEEDED = 5
+    AUTHENTICATION_SUCCEEDED = 6
     """Fully connected and authenticated"""
 
-    AUTHENTICATION_FAILED = 6
-    """Authentication failed, and likely no longer connected"""
+    AUTHENTICATION_FAILED = 7
+    """Authentication failed, no longer connected"""
 
 
 class WyzeIOTCSession:
@@ -265,37 +268,6 @@ class WyzeIOTCSession:
 
         return sess_info
 
-    def _auth(self):
-        assert (
-            self.state == WyzeIOTCSessionState.CONNECTED
-        ), f"Auth expected state to be connected but not authed; state={self.state}"
-
-        with self.iotctrl_mux() as mux:
-            challenge = mux.send_ioctl(K10000ConnectRequest())
-            challenge_response = respond_to_ioctrl_10001(
-                challenge.result(),
-                challenge.resp_protocol,
-                self.camera.enr,
-                self.camera.product_model,
-                self.camera.mac,
-                self.account.phone_id,
-                self.account.open_user_id,
-            )
-            auth_response = mux.send_ioctl(challenge_response).result()
-            assert (
-                auth_response["connectionRes"] == "1"
-            ), f"Authentication did not succeed! {auth_response}"
-            self.camera.set_camera_info(auth_response["cameraInfo"])
-            resolving = mux.send_ioctl(
-                K10056SetResolvingBit(
-                    self.preferred_frame_size, self.preferred_bitrate
-                )
-            )
-
-            mux.waitfor(resolving)
-
-        return self
-
     def iotctrl_mux(self) -> TutkIOCtrlMux:
         """Constructs a new TutkIOCtrlMux for this session
 
@@ -375,6 +347,9 @@ class WyzeIOTCSession:
                     continue
                 elif errno == tutk.AV_ER_INCOMPLETE_FRAME:
                     warnings.warn("Received incomplete frame")
+                    continue
+                elif errno == tutk.AV_ER_LOSED_THIS_FRAME:
+                    warnings.warn("Lost frame")
                     continue
                 else:
                     raise tutk.TutkError(errno)
@@ -601,26 +576,36 @@ class WyzeIOTCSession:
         password="888888",
         max_buf_size=5 * 1024 * 1024,
     ):
-        self.state = WyzeIOTCSessionState.IOTC_CONNECTING
-        self.session_id = tutk.iotc_connect_by_uid(
-            self.tutk_platform_lib, self.camera.p2p_id
-        )
-        self.session_check()
+        try:
+            self.state = WyzeIOTCSessionState.IOTC_CONNECTING
+            self.session_id = tutk.iotc_get_session_id(self.tutk_platform_lib)
+            if self.session_id < 0:  # type: ignore
+                raise tutk.TutkError(self.session_id)
+            self.session_id = tutk.iotc_connect_by_uid_parallel(
+                self.tutk_platform_lib, self.camera.p2p_id, self.session_id
+            )
+            if self.session_id < 0:  # type: ignore
+                raise tutk.TutkError(self.session_id)
 
-        self.state = WyzeIOTCSessionState.AV_CONNECTING
-        av_chan_id, pn_serv_type = tutk.av_client_start(
-            self.tutk_platform_lib,
-            self.session_id,
-            username.encode("ascii"),
-            password.encode("ascii"),
-            timeout_secs,
-            channel_id,
-        )
+            self.session_check()
 
-        if av_chan_id < 0:  # type: ignore
-            raise tutk.TutkError(av_chan_id)
-        self.av_chan_id = av_chan_id
-        self.state = WyzeIOTCSessionState.CONNECTED
+            self.state = WyzeIOTCSessionState.AV_CONNECTING
+            av_chan_id, pn_serv_type = tutk.av_client_start(
+                self.tutk_platform_lib,
+                self.session_id,
+                username.encode("ascii"),
+                password.encode("ascii"),
+                timeout_secs,
+                channel_id,
+            )
+
+            if av_chan_id < 0:  # type: ignore
+                raise tutk.TutkError(av_chan_id)
+            self.av_chan_id = av_chan_id
+            self.state = WyzeIOTCSessionState.CONNECTED
+        finally:
+            if self.state != WyzeIOTCSessionState.CONNECTED:
+                self.state = WyzeIOTCSessionState.CONNECTING_FAILED
 
         print(
             f"AV Client Start: "
@@ -630,6 +615,42 @@ class WyzeIOTCSession:
         )
 
         tutk.av_client_set_max_buf_size(self.tutk_platform_lib, max_buf_size)
+
+    def _auth(self):
+        assert (
+            self.state == WyzeIOTCSessionState.CONNECTED
+        ), f"Auth expected state to be connected but not authed; state={self.state}"
+
+        self.state = WyzeIOTCSessionState.AUTHENTICATING
+        try:
+            with self.iotctrl_mux() as mux:
+                challenge = mux.send_ioctl(K10000ConnectRequest())
+                challenge_response = respond_to_ioctrl_10001(
+                    challenge.result(),
+                    challenge.resp_protocol,
+                    self.camera.enr,
+                    self.camera.product_model,
+                    self.camera.mac,
+                    self.account.phone_id,
+                    self.account.open_user_id,
+                )
+                auth_response = mux.send_ioctl(challenge_response).result()
+                assert (
+                    auth_response["connectionRes"] == "1"
+                ), f"Authentication did not succeed! {auth_response}"
+                self.camera.set_camera_info(auth_response["cameraInfo"])
+                resolving = mux.send_ioctl(
+                    K10056SetResolvingBit(
+                        self.preferred_frame_size, self.preferred_bitrate
+                    )
+                )
+
+                mux.waitfor(resolving)
+                self.state = WyzeIOTCSessionState.AUTHENTICATION_SUCCEEDED
+        finally:
+            if self.state != WyzeIOTCSessionState.AUTHENTICATION_SUCCEEDED:
+                self.state = WyzeIOTCSessionState.AUTHENTICATION_FAILED
+        return self
 
     def _disconnect(self):
         if self.av_chan_id:
