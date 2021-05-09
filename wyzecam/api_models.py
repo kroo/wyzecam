@@ -61,6 +61,8 @@ class WyzeCamera(BaseModel):
     """
 
     p2p_id: str
+    p2p_type: int
+    ip: str
     enr: str
     mac: str
     product_model: str
