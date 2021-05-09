@@ -624,11 +624,22 @@ def iotc_deinitialize(tutk_platform_lib: CDLL) -> c_int:
 
 
 def load_library(
-    shared_lib_path: str = "/usr/local/lib/libIOTCAPIs_ALL.dylib",
+    shared_lib_path: Optional[str] = None,
 ) -> CDLL:
     """Load the underlying iotc library
 
     :param shared_lib_path: the path to the shared library libIOTCAPIs_ALL
     :return: the tutk_platform_lib, suitable for passing to other functions in this module
     """
+    if shared_lib_path is None:
+        if pathlib.Path("/usr/local/lib/libIOTCAPIs_ALL.dylib").exists():
+            shared_lib_path = "/usr/local/lib/libIOTCAPIs_ALL.dylib"
+        if pathlib.Path("/usr/local/lib/libIOTCAPIs_ALL.so").exists():
+            shared_lib_path = "/usr/local/lib/libIOTCAPIs_ALL.so"
+
+    if shared_lib_path is None:
+        raise RuntimeError(
+            "Could not find libIOTCAPIs_ALL shared library.  See documentation, "
+            "or specify the full path as an argument to load_library()."
+        )
     return cdll.LoadLibrary(shared_lib_path)
