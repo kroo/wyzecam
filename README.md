@@ -79,6 +79,16 @@ cp libIOTCAPIs_ALL.so /usr/local/lib/
 
 Note: you will need to pick the appropriate architecture.
 
+### On Windows:
+
+1. Follow [guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to install Windows Subsystem for Linux  
+2. Install [VcXsrv Windows X Server](https://sourceforge.net/projects/vcxsrv/)
+3. Run the following command and add it to `/etc/bash.bashrc`
+```bash
+export DISPLAY=":0"
+```
+4. Follow Linux instructions to compile the shared library
+
 ## 🛡 License
 
 [![License](https://img.shields.io/github/license/kroo/wyzecam)](https://github.com/kroo/wyzecam/blob/master/LICENSE)
