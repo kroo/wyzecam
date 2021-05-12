@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "wyzecam"
-version = "1.1.0"
+version = "1.2.0"
 description = "Python package for communicating with wyze cameras over the local network"
 readme = "README.md"
 authors = [
