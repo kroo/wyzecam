@@ -61,9 +61,6 @@ class TutkIOCtrlFuture:
             return self.req.parse_response(self.resp_data)
         if self.errcode:
             raise tutk.TutkError(self.errcode)
-        if self.expected_response_code is None:
-            logger.warning("no response code!")
-            return None
         assert self.queue is not None, "Future created without error nor queue!"
 
         msg = self.queue.get(block=block, timeout=timeout)
@@ -190,9 +187,6 @@ class TutkIOCtrlMux:
         )
         if errcode:
             return TutkIOCtrlFuture(msg, errcode=errcode)
-        if not msg.expected_response_code:
-            logger.warning("no expected response code found")
-            return TutkIOCtrlFuture(msg)
 
         return TutkIOCtrlFuture(msg, self.queues[msg.expected_response_code])
 
