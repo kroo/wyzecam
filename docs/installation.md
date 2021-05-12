@@ -25,7 +25,7 @@ cp libIOTCAPIs_ALL.dylib /usr/local/lib/
 ```bash
 unzip TUTK_IOTC_Platform_14W42P1.zip
 cd Lib/Linux/x64/
-g++ -fpic -shared -Wl,-whole-archive libAVAPIs.a libIOTCAPIs.a -o libIOTCAPIs_ALL.so
+g++ -fpic -shared -Wl,--whole-archive libAVAPIs.a libIOTCAPIs.a -Wl,--no-whole-archive -o libIOTCAPIs_ALL.so
 cp libIOTCAPIs_ALL.so /usr/local/lib/
 ```
 
@@ -33,4 +33,10 @@ Note: you will need to pick the appropriate architecture.
 
 ### On Windows:
 
-TBD (don't have a windows box handy, if anyone wants to test windows support, feel free to make a pull request!).
+1. Follow [guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to install Windows Subsystem for Linux  
+2. Install [VcXsrv Windows X Server](https://sourceforge.net/projects/vcxsrv/)
+3. Run the following command and add it to `/etc/bash.bashrc`
+```bash
+export DISPLAY=":0"
+```
+4. Follow Linux instructions to compile the shared library
