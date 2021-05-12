@@ -578,14 +578,17 @@ class WyzeIOTCSession:
     ):
         try:
             self.state = WyzeIOTCSessionState.IOTC_CONNECTING
-            self.session_id = tutk.iotc_get_session_id(self.tutk_platform_lib)
-            if self.session_id < 0:  # type: ignore
-                raise tutk.TutkError(self.session_id)
-            self.session_id = tutk.iotc_connect_by_uid_parallel(
+            session_id = tutk.iotc_get_session_id(self.tutk_platform_lib)
+            if session_id < 0:  # type: ignore
+                raise tutk.TutkError(session_id)
+            self.session_id = session_id
+
+            session_id = tutk.iotc_connect_by_uid_parallel(
                 self.tutk_platform_lib, self.camera.p2p_id, self.session_id
             )
-            if self.session_id < 0:  # type: ignore
-                raise tutk.TutkError(self.session_id)
+            if session_id < 0:  # type: ignore
+                raise tutk.TutkError(session_id)
+            self.session_id = session_id
 
             self.session_check()
 
@@ -603,23 +606,28 @@ class WyzeIOTCSession:
                 raise tutk.TutkError(av_chan_id)
             self.av_chan_id = av_chan_id
             self.state = WyzeIOTCSessionState.CONNECTED
+        except tutk.TutkError:
+            self._disconnect()
+            raise
         finally:
             if self.state != WyzeIOTCSessionState.CONNECTED:
                 self.state = WyzeIOTCSessionState.CONNECTING_FAILED
 
         print(
             f"AV Client Start: "
-            f"chan_id={av_chan_id} "
-            f"expected_chan={channel_id} "
-            f"pn_serv_type={pn_serv_type.value}"
+            f"chan_id={self.av_chan_id} "
+            f"expected_chan={channel_id}"
         )
 
         tutk.av_client_set_max_buf_size(self.tutk_platform_lib, max_buf_size)
 
     def _auth(self):
+        if self.state == WyzeIOTCSessionState.CONNECTING_FAILED:
+            return
+
         assert (
             self.state == WyzeIOTCSessionState.CONNECTED
-        ), f"Auth expected state to be connected but not authed; state={self.state}"
+        ), f"Auth expected state to be connected but not authed; state={self.state.name}"
 
         self.state = WyzeIOTCSessionState.AUTHENTICATING
         try:
@@ -647,16 +655,19 @@ class WyzeIOTCSession:
 
                 mux.waitfor(resolving)
                 self.state = WyzeIOTCSessionState.AUTHENTICATION_SUCCEEDED
+        except tutk.TutkError:
+            self._disconnect()
+            raise
         finally:
             if self.state != WyzeIOTCSessionState.AUTHENTICATION_SUCCEEDED:
                 self.state = WyzeIOTCSessionState.AUTHENTICATION_FAILED
         return self
 
     def _disconnect(self):
-        if self.av_chan_id:
+        if self.av_chan_id is not None:
             tutk.av_client_stop(self.tutk_platform_lib, self.av_chan_id)
         self.av_chan_id = None
-        if self.session_id:
+        if self.session_id is not None:
             tutk.iotc_session_close(self.tutk_platform_lib, self.session_id)
         self.session_id = None
         self.state = WyzeIOTCSessionState.DISCONNECTED

@@ -296,6 +296,8 @@ class TutkIOCtrlMuxListener(threading.Thread):
                     "Connection closed by remote. Closing connection."
                 )
                 break
+            elif actual_len < 0:
+                raise tutk.TutkError(actual_len)
 
             header, payload = tutk_protocol.decode(data)
             logger.debug(f"RECV {header}: {repr(payload)}")

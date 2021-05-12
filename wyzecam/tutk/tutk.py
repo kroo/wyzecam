@@ -564,10 +564,29 @@ def iotc_connect_by_uid_parallel(
     :param session_id: The Session ID got from IOTC_Get_SessionID() the connection should bind to.
     :return: IOTC session ID if return value >= 0, error code if return value < 0
     """
-    resultant_session_id: c_int = tutk_platform_lib.IOTC_Connect_ByUID(
+    resultant_session_id: c_int = tutk_platform_lib.IOTC_Connect_ByUID_Parallel(
         c_char_p(p2p_id.encode("ascii")), session_id
     )
     return resultant_session_id
+
+
+def iotc_connect_stop_by_session_id(
+    tutk_platform_lib: CDLL, session_id: c_int
+) -> c_int:
+    """
+    Used by a client to stop a specific session connecting a device.
+
+    This function is for a client to stop connecting a device. Since IOTC_Connect_ByUID_Parallel()
+     is a block processes, that means the client will have to wait for the return of these functions
+     before executing sequential instructions. In some cases, users may want the client to stop
+     connecting immediately by this function in another thread before the return of connection process.
+
+    :param tutk_platform_lib: The underlying c library (from tutk.load_library())
+    :param session_id: The Session ID got from IOTC_Get_SessionID() the connection should bind to.
+    :return: Error code if return value < 0, otherwise 0 if successful
+    """
+    errno: c_int = tutk_platform_lib.IOTC_Connect_Stop_BySID(session_id)
+    return errno
 
 
 def iotc_set_log_path(tutk_platform_lib: CDLL, path: str) -> None:
