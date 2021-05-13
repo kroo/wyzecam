@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.e35208c4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.bde7dde4.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ef6f36e2.min.css">
@@ -967,7 +967,7 @@ to the camera.</p>
             <span class="n">encoded_msg</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
         <span class="p">)</span>
     <span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;SEND&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">encoded_msg_header</span><span class="p">,</span> <span class="n">encoded_msg</span><span class="p">[</span><span class="mi">16</span><span class="p">:])</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;SEND </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">encoded_msg_header</span><span class="p">,</span> <span class="n">encoded_msg</span><span class="p">[</span><span class="mi">16</span><span class="p">:])</span>
     <span class="n">errcode</span> <span class="o">=</span> <span class="n">tutk</span><span class="o">.</span><span class="n">av_send_io_ctrl</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tutk_platform_lib</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">av_chan_id</span><span class="p">,</span> <span class="n">ctrl_type</span><span class="p">,</span> <span class="n">encoded_msg</span>
     <span class="p">)</span>
@@ -1249,6 +1249,8 @@ from the args and kwargs arguments, respectively.</p>
                 <span class="s2">&quot;Connection closed by remote. Closing connection.&quot;</span>
             <span class="p">)</span>
             <span class="k">break</span>
+        <span class="k">elif</span> <span class="n">actual_len</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">tutk</span><span class="o">.</span><span class="n">TutkError</span><span class="p">(</span><span class="n">actual_len</span><span class="p">)</span>
 
         <span class="n">header</span><span class="p">,</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">tutk_protocol</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RECV </span><span class="si">{</span><span class="n">header</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1513,10 +1515,10 @@ of this response should be retrieved by calling <code>result()</code>, below.</p
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
       
     
   </body>

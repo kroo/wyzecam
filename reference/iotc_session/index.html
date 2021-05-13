@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.e35208c4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
@@ -905,7 +905,7 @@ have to introspect the frame_info object to determine the format!</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Iterator[Tuple[Optional[bytes], wyzecam.tutk.tutk.FrameInfoStruct]]</code></td>
+      <td><code>Iterator[Tuple[Optional[bytes], Union[wyzecam.tutk.tutk.FrameInfoStruct, wyzecam.tutk.tutk.FrameInfo3Struct]]]</code></td>
       <td><p>A generator, which when iterated over, yields a tuple containing the decoded image (as a <a href="https://pyav.org/docs/stable/api/video.html#av.video.frame.VideoFrame">PyAV VideoFrame</a>), as well as metadata about the frame (in the form of a <a href="../tutk/tutk/#wyzecam.tutk.tutk.FrameInfoStruct">tutk.FrameInfoStruct</a>).</p></td>
     </tr>
   </tbody>
@@ -914,7 +914,11 @@ have to introspect the frame_info object to determine the format!</p>
           <summary>Source code in <code>wyzecam/iotc.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">recv_video_data</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span>
+    <span class="n">Tuple</span><span class="p">[</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">,</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfo3Struct</span><span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;A generator for returning raw video frames!</span>
 
 <span class="sd">    By iterating over the return value of this function, you will</span>
@@ -963,12 +967,23 @@ have to introspect the frame_info object to determine the format!</p>
             <span class="k">elif</span> <span class="n">errno</span> <span class="o">==</span> <span class="n">tutk</span><span class="o">.</span><span class="n">AV_ER_INCOMPLETE_FRAME</span><span class="p">:</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Received incomplete frame&quot;</span><span class="p">)</span>
                 <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">errno</span> <span class="o">==</span> <span class="n">tutk</span><span class="o">.</span><span class="n">AV_ER_LOSED_THIS_FRAME</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Lost frame&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">tutk</span><span class="o">.</span><span class="n">TutkError</span><span class="p">(</span><span class="n">errno</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">frame_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Got no frame info without an error!&quot;</span>
         <span class="k">if</span> <span class="n">frame_info</span><span class="o">.</span><span class="n">frame_size</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preferred_frame_size</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;skipping smaller frame at start of stream&quot;</span><span class="p">)</span>
-            <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">frame_info</span><span class="o">.</span><span class="n">frame_size</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;skipping smaller frame at start of stream (frame_size=</span><span class="si">{</span><span class="n">frame_info</span><span class="o">.</span><span class="n">frame_size</span><span class="si">}</span><span class="s2">)&quot;</span>
+                <span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># wyze doorbell has weird rotated image sizes.</span>
+                <span class="k">if</span> <span class="n">frame_info</span><span class="o">.</span><span class="n">frame_size</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preferred_frame_size</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
         <span class="k">yield</span> <span class="n">frame_data</span><span class="p">,</span> <span class="n">frame_info</span>
 </code></pre></div>
         </details>
@@ -1017,7 +1032,7 @@ the contents of this object.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Iterator[Tuple[av.VideoFrame, wyzecam.tutk.tutk.FrameInfoStruct]]</code></td>
+      <td><code>Iterator[Tuple[av.VideoFrame, Union[wyzecam.tutk.tutk.FrameInfoStruct, wyzecam.tutk.tutk.FrameInfo3Struct]]]</code></td>
       <td><p>A generator, which when iterated over, yields a tuple containing the decoded image (as a <a href="https://pyav.org/docs/stable/api/video.html#av.video.frame.VideoFrame">PyAV VideoFrame</a>), as well as metadata about the frame (in the form of a <a href="../tutk/tutk/#wyzecam.tutk.tutk.FrameInfoStruct">tutk.FrameInfoStruct</a>).</p></td>
     </tr>
   </tbody>
@@ -1026,7 +1041,11 @@ the contents of this object.</p>
           <summary>Source code in <code>wyzecam/iotc.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">recv_video_frame</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="s2">&quot;av.VideoFrame&quot;</span><span class="p">,</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span>
+    <span class="n">Tuple</span><span class="p">[</span>
+        <span class="s2">&quot;av.VideoFrame&quot;</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">,</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfo3Struct</span><span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;A generator for returning decoded video frames!</span>
 
 <span class="sd">    By iterating over the return value of this function, you will conveniently</span>
@@ -1116,7 +1135,7 @@ and <a href="https://numpy.org/">numpy</a>.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Iterator[Tuple[np.ndarray, wyzecam.tutk.tutk.FrameInfoStruct]]</code></td>
+      <td><code>Iterator[Tuple[np.ndarray, Union[wyzecam.tutk.tutk.FrameInfoStruct, wyzecam.tutk.tutk.FrameInfo3Struct]]]</code></td>
       <td><p>A generator, which when iterated over, yields a tuple containing the decoded image (as a numpy array), as well as metadata about the frame (in the form of a <a href="../tutk/tutk/#wyzecam.tutk.tutk.FrameInfoStruct">tutk.FrameInfoStruct</a>).</p></td>
     </tr>
   </tbody>
@@ -1125,7 +1144,9 @@ and <a href="https://numpy.org/">numpy</a>.</p>
           <summary>Source code in <code>wyzecam/iotc.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">recv_video_frame_ndarray</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="s2">&quot;np.ndarray&quot;</span><span class="p">,</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span>
+    <span class="n">Tuple</span><span class="p">[</span><span class="s2">&quot;np.ndarray&quot;</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">,</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfo3Struct</span><span class="p">]]</span>
+<span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;A generator for returning decoded video frames!</span>
 
 <span class="sd">    By iterating over the return value of this function, you will conveniently</span>
@@ -1160,6 +1181,9 @@ and <a href="https://numpy.org/">numpy</a>.</p>
 
     <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">frame_info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">recv_video_frame</span><span class="p">():</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_ndarray</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;bgr24&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">frame_info</span><span class="o">.</span><span class="n">frame_size</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
         <span class="k">yield</span> <span class="n">img</span><span class="p">,</span> <span class="n">frame_info</span>
 </code></pre></div>
         </details>
@@ -1244,7 +1268,7 @@ of the video.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Iterator[Tuple[np.ndarray, wyzecam.tutk.tutk.FrameInfoStruct, Dict[str, int]]]</code></td>
+      <td><code>Iterator[Tuple[np.ndarray, Union[wyzecam.tutk.tutk.FrameInfoStruct, wyzecam.tutk.tutk.FrameInfo3Struct], Dict[str, int]]]</code></td>
       <td><p>A generator, which when iterated over, yields a 3-tuple containing the decoded image (as a numpy array), metadata about the frame (in the form of a <a href="../tutk/tutk/#wyzecam.tutk.tutk.FrameInfoStruct">tutk.FrameInfoStruct</a>), and some performance statistics (in the form of a dict).</p></td>
     </tr>
   </tbody>
@@ -1257,7 +1281,13 @@ of the video.</p>
     <span class="n">draw_stats</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
         <span class="nb">str</span>
     <span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{width}</span><span class="s2">x</span><span class="si">{height}</span><span class="s2"> </span><span class="si">{kilobytes_per_second}</span><span class="s2"> kB/s </span><span class="si">{frames_per_second}</span><span class="s2"> FPS&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="s2">&quot;np.ndarray&quot;</span><span class="p">,</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span>
+    <span class="n">Tuple</span><span class="p">[</span>
+        <span class="s2">&quot;np.ndarray&quot;</span><span class="p">,</span>
+        <span class="n">Union</span><span class="p">[</span><span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfoStruct</span><span class="p">,</span> <span class="n">tutk</span><span class="o">.</span><span class="n">FrameInfo3Struct</span><span class="p">],</span>
+        <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Does everything recv_video_frame_ndarray does, but also computes a number</span>
 <span class="sd">    of useful / interesting debug metrics including effective framerate, bitrate,</span>
@@ -1319,6 +1349,11 @@ of the video.</p>
                 <span class="o">+</span> <span class="n">stat_window</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp_ms</span> <span class="o">/</span> <span class="mi">1_000_000</span>
             <span class="p">)</span>
             <span class="n">stat_window_duration</span> <span class="o">=</span> <span class="n">stat_window_end</span> <span class="o">-</span> <span class="n">stat_window_start</span>
+            <span class="k">if</span> <span class="n">stat_window_duration</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># wyze doorbell doesn&#39;t support timestamp_ms; workaround:</span>
+                <span class="n">stat_window_duration</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">stat_window</span><span class="p">)</span> <span class="o">/</span> <span class="n">stat_window</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">framerate</span>
+                <span class="p">)</span>
             <span class="n">stat_window_total_size</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
                 <span class="n">b</span><span class="o">.</span><span class="n">frame_len</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">stat_window</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="p">)</span>  <span class="c1"># skip the last reading</span>
@@ -1509,10 +1544,10 @@ still alive as well as getting the IOTC session info.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
       
     
   </body>
