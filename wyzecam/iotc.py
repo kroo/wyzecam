@@ -62,7 +62,7 @@ class WyzeIOTC:
         tutk_platform_lib: Optional[Union[str, CDLL]] = None,
         udp_port: Optional[int] = None,
         max_num_av_channels: Optional[int] = None,
-        debug=False,
+        debug: bool = False,
     ) -> None:
         """Construct a WyzeIOTC session object
 
@@ -310,7 +310,11 @@ class WyzeIOTCSession:
 
     def recv_video_data(
         self,
-    ) -> Iterator[Tuple[Optional[bytes], tutk.FrameInfoStruct]]:
+    ) -> Iterator[
+        Tuple[
+            Optional[bytes], Union[tutk.FrameInfoStruct, tutk.FrameInfo3Struct]
+        ]
+    ]:
         """A generator for returning raw video frames!
 
         By iterating over the return value of this function, you will
@@ -380,7 +384,11 @@ class WyzeIOTCSession:
 
     def recv_video_frame(
         self,
-    ) -> Iterator[Tuple["av.VideoFrame", tutk.FrameInfoStruct]]:
+    ) -> Iterator[
+        Tuple[
+            "av.VideoFrame", Union[tutk.FrameInfoStruct, tutk.FrameInfo3Struct]
+        ]
+    ]:
         """A generator for returning decoded video frames!
 
         By iterating over the return value of this function, you will conveniently
@@ -424,7 +432,9 @@ class WyzeIOTCSession:
 
     def recv_video_frame_ndarray(
         self,
-    ) -> Iterator[Tuple["np.ndarray", tutk.FrameInfoStruct]]:
+    ) -> Iterator[
+        Tuple["np.ndarray", Union[tutk.FrameInfoStruct, tutk.FrameInfo3Struct]]
+    ]:
         """A generator for returning decoded video frames!
 
         By iterating over the return value of this function, you will conveniently
@@ -470,7 +480,13 @@ class WyzeIOTCSession:
         draw_stats: Optional[
             str
         ] = "{width}x{height} {kilobytes_per_second} kB/s {frames_per_second} FPS",
-    ) -> Iterator[Tuple["np.ndarray", tutk.FrameInfoStruct, Dict[str, int]]]:
+    ) -> Iterator[
+        Tuple[
+            "np.ndarray",
+            Union[tutk.FrameInfoStruct, tutk.FrameInfo3Struct],
+            Dict[str, int],
+        ]
+    ]:
         """
         Does everything recv_video_frame_ndarray does, but also computes a number
         of useful / interesting debug metrics including effective framerate, bitrate,
