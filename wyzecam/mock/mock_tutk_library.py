@@ -37,6 +37,7 @@ class MockTutkLibrary:
     """A mock tutk_platform_lib, for testing"""
 
     def __init__(self):
+        self.got_resolving_bit_doorbell = None
         self.client_stop_called = False
         self.deinitialize_called = False
         self.session_closed_called = False
@@ -86,6 +87,12 @@ class MockTutkLibrary:
             ctl_data_len.value = len(encoded_response)
             self.got_resolving_bit = RESPONDED
             return len(encoded_response)
+        elif self.got_resolving_bit_doorbell == RECIEVED:
+            encoded_response = self.respond_10052_resolving_bit_doorbell()
+            ctl_data[: len(encoded_response)] = encoded_response
+            ctl_data_len.value = len(encoded_response)
+            self.got_resolving_bit = RESPONDED
+            return len(encoded_response)
         else:
             time.sleep(timeout_ms / 10_000)  # 10x faster than usual
             return tutk.AV_ER_TIMEOUT
@@ -93,6 +100,11 @@ class MockTutkLibrary:
     def respond_10056_resolving_bit(self):
         response = bytes(1)
         encoded_response = tutk_protocol.encode(10057, len(response), response)
+        return encoded_response
+
+    def respond_10052_resolving_bit_doorbell(self):
+        response = bytes(1)
+        encoded_response = tutk_protocol.encode(10053, len(response), response)
         return encoded_response
 
     def respond_10002_auth(self):
@@ -127,6 +139,8 @@ class MockTutkLibrary:
             self.got_auth = RECIEVED
         elif header.code == 10056:
             self.got_resolving_bit = RECIEVED
+        elif header.code == 10052:
+            self.got_resolving_bit_doorbell = RECIEVED
         else:
             raise ValueError("Unexpected command sent!")
         print(header, data)

@@ -56,6 +56,18 @@ Represents the size of the video stream sent back from the server; 360P
 or 640x360 pixels.
 """
 
+FRAME_SIZE_DOORBELL_HD = 3
+"""
+Represents the size of the video stream sent back from the server;
+portrait 1296 x 1728.
+"""
+
+FRAME_SIZE_DOORBELL_SD = 4
+"""
+Represents the size of the video stream sent back from the server;
+portrait 480 x 640.
+"""
+
 IOTYPE_USER_DEFINED_START = 256
 
 AV_ER_TIMEOUT = -20011
@@ -299,10 +311,35 @@ class FrameInfoStruct(FormattedStructure):
     ]
 
 
+class FrameInfo3Struct(FormattedStructure):
+    _fields_ = [
+        ("codec_id", c_uint16),
+        ("is_keyframe", c_uint8),
+        ("cam_index", c_uint8),
+        ("online_num", c_uint8),
+        ("framerate", c_uint8),
+        ("frame_size", c_uint8),
+        ("bitrate", c_uint8),
+        ("timestamp_ms", c_uint32),
+        ("timestamp", c_uint32),
+        ("frame_len", c_uint32),
+        ("frame_no", c_uint32),
+        ("ac_mac_addr", c_char * 12),
+        ("n_play_token", c_int32),
+        ("face_pos_x", c_uint16),
+        ("face_pos_y", c_uint16),
+        ("face_width", c_uint16),
+        ("face_height", c_uint16),
+    ]
+
+
 def av_recv_frame_data(
     tutk_platform_lib: CDLL, av_chan_id: c_int
 ) -> typing.Tuple[
-    int, Optional[bytes], Optional[FrameInfoStruct], Optional[int]
+    int,
+    Optional[bytes],
+    Optional[Union[FrameInfoStruct, FrameInfo3Struct]],
+    Optional[int],
 ]:
     """A new version AV client receives frame data from an AV server.
 
@@ -317,9 +354,10 @@ def av_recv_frame_data(
     frame_data_expected_len = c_int()
     frame_data = (c_char * frame_data_max_len)()
     frame_info_actual_len = c_int()
-    frame_info = FrameInfoStruct()
-    frame_info_max_len = sizeof(FrameInfoStruct)
     frame_index = c_uint()
+
+    frame_info_max_len = max(sizeof(FrameInfo3Struct), sizeof(FrameInfoStruct))
+    frame_info = (c_char * frame_info_max_len)()
 
     errno = tutk_platform_lib.avRecvFrameData2(
         av_chan_id,
@@ -337,10 +375,22 @@ def av_recv_frame_data(
         return errno, None, None, None
     else:
         frame_data_actual: bytes = frame_data[: frame_data_actual_len.value]  # type: ignore
+        frame_info_actual: Union[FrameInfoStruct, FrameInfo3Struct]
+        if frame_info_actual_len.value == sizeof(FrameInfo3Struct):
+            frame_info_actual = FrameInfo3Struct.from_buffer(frame_info)
+        elif frame_info_actual_len.value == sizeof(FrameInfoStruct):
+            frame_info_actual = FrameInfoStruct.from_buffer(frame_info)
+        else:
+            from wyzecam.tutk.tutk_protocol import TutkWyzeProtocolError
+
+            raise TutkWyzeProtocolError(
+                f"Unknown frame info structure format! len={frame_info_actual_len}"
+            )
+
         return (
             0,
             frame_data_actual,
-            frame_info,
+            frame_info_actual,
             frame_index.value,
         )
 

@@ -1,6 +1,7 @@
 from typing import Dict, Iterator, Optional, Tuple, Union
 
 import enum
+import logging
 import pathlib
 import time
 import warnings
@@ -24,13 +25,16 @@ try:
 except ImportError:
     np = None  # type: ignore
 
-from wyzecam.tutk import tutk
+from wyzecam.tutk import tutk, tutk_ioctl_mux, tutk_protocol
 from wyzecam.tutk.tutk_ioctl_mux import TutkIOCtrlMux
 from wyzecam.tutk.tutk_protocol import (
     K10000ConnectRequest,
+    K10052DBSetResolvingBit,
     K10056SetResolvingBit,
     respond_to_ioctrl_10001,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class WyzeIOTC:
@@ -58,6 +62,7 @@ class WyzeIOTC:
         tutk_platform_lib: Optional[Union[str, CDLL]] = None,
         udp_port: Optional[int] = None,
         max_num_av_channels: Optional[int] = None,
+        debug=False,
     ) -> None:
         """Construct a WyzeIOTC session object
 
@@ -80,6 +85,12 @@ class WyzeIOTC:
         self.initd = False
         self.udp_port = udp_port
         self.max_num_av_channels = max_num_av_channels
+
+        if debug:
+            logging.basicConfig()
+            logger.setLevel(logging.DEBUG)
+            tutk_protocol.logger.setLevel(logging.DEBUG)
+            tutk_ioctl_mux.logger.setLevel(logging.DEBUG)
 
     def initialize(self):
         """Initialize the underlying TUTK library
@@ -355,8 +366,16 @@ class WyzeIOTCSession:
                     raise tutk.TutkError(errno)
             assert frame_info is not None, "Got no frame info without an error!"
             if frame_info.frame_size != self.preferred_frame_size:
-                print("skipping smaller frame at start of stream")
-                continue
+                if frame_info.frame_size < 2:
+                    logger.debug(
+                        f"skipping smaller frame at start of stream (frame_size={frame_info.frame_size})"
+                    )
+                    continue
+                else:
+                    # wyze doorbell has weird rotated image sizes.
+                    if frame_info.frame_size - 3 != self.preferred_frame_size:
+                        continue
+
             yield frame_data, frame_info
 
     def recv_video_frame(
@@ -440,6 +459,9 @@ class WyzeIOTCSession:
 
         for frame, frame_info in self.recv_video_frame():
             img = frame.to_ndarray(format="bgr24")
+            if frame_info.frame_size in (3, 4):
+                img = np.rot90(img, 3)
+                img = np.ascontiguousarray(img, dtype=np.uint8)
             yield img, frame_info
 
     def recv_video_frame_ndarray_with_stats(
@@ -510,6 +532,11 @@ class WyzeIOTCSession:
                     + stat_window[-1].timestamp_ms / 1_000_000
                 )
                 stat_window_duration = stat_window_end - stat_window_start
+                if stat_window_duration <= 0:
+                    # wyze doorbell doesn't support timestamp_ms; workaround:
+                    stat_window_duration = (
+                        len(stat_window) / stat_window[-1].framerate
+                    )
                 stat_window_total_size = sum(
                     b.frame_len for b in stat_window[:-1]
                 )  # skip the last reading
@@ -557,13 +584,15 @@ class WyzeIOTCSession:
             yield frame_ndarray, frame_info, stats
 
     def _av_codec_from_frameinfo(self, frame_info):
-        if frame_info.codec_id == 78:
+        if frame_info.codec_id == 75:
+            codec_name = "h264"
+        elif frame_info.codec_id == 78:
             codec_name = "h264"
         elif frame_info.codec_id == 80:
             codec_name = "hevc"
         else:
             codec_name = "h264"
-            print(f"Unexpected codec! got {frame_info.codec_id}.")
+            warnings.warn(f"Unexpected codec! got {frame_info.codec_id}.")
         # noinspection PyUnresolvedReferences
         codec = av.CodecContext.create(codec_name, "r")
         return codec
@@ -613,7 +642,7 @@ class WyzeIOTCSession:
             if self.state != WyzeIOTCSessionState.CONNECTED:
                 self.state = WyzeIOTCSessionState.CONNECTING_FAILED
 
-        print(
+        logger.info(
             f"AV Client Start: "
             f"chan_id={self.av_chan_id} "
             f"expected_chan={channel_id}"
@@ -647,13 +676,24 @@ class WyzeIOTCSession:
                     auth_response["connectionRes"] == "1"
                 ), f"Authentication did not succeed! {auth_response}"
                 self.camera.set_camera_info(auth_response["cameraInfo"])
-                resolving = mux.send_ioctl(
-                    K10056SetResolvingBit(
-                        self.preferred_frame_size, self.preferred_bitrate
-                    )
-                )
 
-                mux.waitfor(resolving)
+                if self.camera.product_model != "WYZEDB3":
+                    resolving = mux.send_ioctl(
+                        K10056SetResolvingBit(
+                            self.preferred_frame_size, self.preferred_bitrate
+                        )
+                    )
+
+                    mux.waitfor(resolving)
+                else:
+                    # doorbell has a different message for setting resolutions
+                    resolving = mux.send_ioctl(
+                        K10052DBSetResolvingBit(
+                            self.preferred_frame_size, self.preferred_bitrate
+                        )
+                    )
+
+                    mux.waitfor(resolving)
                 self.state = WyzeIOTCSessionState.AUTHENTICATION_SUCCEEDED
         except tutk.TutkError:
             self._disconnect()

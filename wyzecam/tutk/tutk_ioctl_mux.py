@@ -184,7 +184,7 @@ class TutkIOCtrlMux:
                 encoded_msg[0:16]
             )
         )
-        logger.debug("SEND", msg, encoded_msg_header, encoded_msg[16:])
+        logger.debug("SEND %s %s %s", msg, encoded_msg_header, encoded_msg[16:])
         errcode = tutk.av_send_io_ctrl(
             self.tutk_platform_lib, self.av_chan_id, ctrl_type, encoded_msg
         )

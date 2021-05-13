@@ -2,6 +2,7 @@ import typing
 from typing import Optional
 
 import json
+import logging
 import pathlib
 from ctypes import LittleEndianStructure, c_char, c_uint16, c_uint32
 
@@ -10,6 +11,8 @@ import xxtea
 from . import tutk
 
 project_root = pathlib.Path(__file__).parent
+
+logger = logging.getLogger(__name__)
 
 
 class TutkWyzeProtocolError(tutk.TutkError):
@@ -326,6 +329,53 @@ class K10056SetResolvingBit(TutkWyzeProtocolMessage):
         return resp_data == b"\x01"
 
 
+class K10052DBSetResolvingBit(TutkWyzeProtocolMessage):
+    """
+    A message used to set the resolution and bitrate of a wyze doorbell.
+
+    This is sent automatically after the authentication handshake completes successfully.
+    """
+
+    expected_response_code = 10053
+
+    def __init__(
+        self, frame_size=tutk.FRAME_SIZE_1080P, bitrate=tutk.BITRATE_HD
+    ):
+        """
+        Construct a K10052DBSetResolvingBit message, with a given frame size and bitrate.
+
+        This message is specific to wyze doorbell cams, which have a rotated sensor, and
+        therefore will result in a portrait image rather than the standard sizes.
+
+        Possible frame sizes are:
+
+         - `tutk.FRAME_SIZE_1080P`: will result in 1296 x 1728 portrait video
+         - `tutk.FRAME_SIZE_360P`: will result in 480 x 640 portrait video
+
+        Possible bit rates are:
+
+         - `tutk.BITRATE_360P`: the bitrate chosen when selecting '360P' in the app; 30 KB/s
+         - `tutk.BITRATE_SD`: the bitrate chosen when selecting 'SD' in the app; 60 KB/s
+         - `tutk.BITRATE_HD`: the bitrate chosen when selecting 'HD' in the app; 120 KB/s
+         - `tutk.BITRATE_SUPER_HD`: an even higher bitrate than ever asked for by the app; 150 KB/s
+         - `tutk.BITRATE_SUPER_SUPER_HD`: an even higher bitrate than ever asked for by the app; 240 KB/s
+
+        :param frame_size: the dimensions of the video to stream.
+        :param bitrate: the bit rate, in KB/s to target in the h264/h265 encoder.
+        """
+        super().__init__(10052)
+        self.frame_size = frame_size
+        self.bitrate = bitrate
+
+    def encode(self) -> bytes:
+        payload = bytes([self.bitrate, 0, 1 + self.frame_size, 0, 0, 0])
+
+        return encode(self.code, 6, payload)
+
+    def parse_response(self, resp_data):
+        return resp_data == b"\x01"
+
+
 class K10620CheckNight(TutkWyzeProtocolMessage):
     """
     A message used to check the night mode settings of the camera.
@@ -405,13 +455,13 @@ def respond_to_ioctrl_10001(
 ) -> Optional[TutkWyzeProtocolMessage]:
     camera_status = data[0]
     if camera_status == 2:
-        print("Camera is updating, can't auth.")
+        logger.warning("Camera is updating, can't auth.")
         return None
     elif camera_status == 4:
-        print("Camera is checking enr, can't auth.")
+        logger.warning("Camera is checking enr, can't auth.")
         return None
     elif camera_status not in [1, 3]:
-        print(
+        logger.warning(
             f"Unexpected mode for connect challenge response (10001): {camera_status}"
         )
         return None
@@ -432,7 +482,7 @@ def respond_to_ioctrl_10001(
         )
     else:
         response = K10002ConnectAuth(challenge_response, mac)
-    print(f"Sending response:", response)
+    logger.debug(f"Sending response:", response)
     return response
 
 
@@ -440,6 +490,9 @@ def supports(product_model, protocol, command):
     device_config = json.load(open(project_root / "device_config.json"))
     commands_db = device_config["supportedCommands"]
     supported_commands = []
+
+    if product_model == "WYZEDB3":
+        return False
 
     for k in commands_db["default"]:
         if int(k) <= int(protocol):
