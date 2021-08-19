@@ -482,7 +482,7 @@ def respond_to_ioctrl_10001(
         )
     else:
         response = K10002ConnectAuth(challenge_response, mac)
-    logger.debug(f"Sending response:", response)
+    logger.debug(f"Sending response: {response}")
     return response
 
 
