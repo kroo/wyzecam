@@ -1,4 +1,4 @@
-from typing import Dict, Iterator, Optional, Tuple, Union
+from typing import Any, Dict, Iterator, Optional, Tuple, Union
 
 import enum
 import logging
@@ -433,7 +433,10 @@ class WyzeIOTCSession:
     def recv_video_frame_ndarray(
         self,
     ) -> Iterator[
-        Tuple["np.ndarray", Union[tutk.FrameInfoStruct, tutk.FrameInfo3Struct]]
+        Tuple[
+            "np.ndarray[Any, Any]",
+            Union[tutk.FrameInfoStruct, tutk.FrameInfo3Struct],
+        ]
     ]:
         """A generator for returning decoded video frames!
 
@@ -482,7 +485,7 @@ class WyzeIOTCSession:
         ] = "{width}x{height} {kilobytes_per_second} kB/s {frames_per_second} FPS",
     ) -> Iterator[
         Tuple[
-            "np.ndarray",
+            "np.ndarray[Any, Any]",
             Union[tutk.FrameInfoStruct, tutk.FrameInfo3Struct],
             Dict[str, int],
         ]
