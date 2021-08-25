@@ -68,10 +68,8 @@ class TutkWyzeProtocolMessage:
     :var expected_response_code: the code of the message expected to
                                  be the 'response' to this one, from
                                  the camera.
-    :vartype expected_response_code: int
+    :vartype expected_response_code: int is always code + 1
     """
-
-    expected_response_code: typing.Optional[int] = None
 
     def __init__(self, code: int) -> None:
         """Construct a new TutkWyzeProtocolMessage
@@ -81,6 +79,7 @@ class TutkWyzeProtocolMessage:
                    responses from the camera back to the client are always odd.
         """
         self.code = code
+        self.expected_response_code = code + 1
 
     def encode(self) -> bytes:
         """
@@ -112,8 +111,6 @@ class K10000ConnectRequest(TutkWyzeProtocolMessage):
     bytes for the client to sign with the 'enr' of the camera.
     """
 
-    expected_response_code = 10001
-
     def __init__(self):
         """Construct a new K10000ConnectRequest"""
         super().__init__(10000)
@@ -132,8 +129,6 @@ class K10002ConnectAuth(TutkWyzeProtocolMessage):
     The expected response to this command is `10003`, in which the camera provides a json object
     with the result of the authentication exchange (and if successful, a bunch of device information).
     """
-
-    expected_response_code = 10003
 
     def __init__(
         self,
@@ -189,8 +184,6 @@ class K10008ConnectUserAuth(TutkWyzeProtocolMessage):
     with the result of the authentication exchange (and if successful, a bunch of device information).
 
     """
-
-    expected_response_code = 10009
 
     def __init__(
         self,
@@ -250,8 +243,6 @@ class K10010ControlChannel(TutkWyzeProtocolMessage):
     Not terribly well understood.
     """
 
-    expected_response_code = 10011
-
     def __init__(self, k: int = 1, v: int = 2):
         super().__init__(10010)
         assert k < 256, "control channel key must be < 256"
@@ -269,8 +260,6 @@ class K10020CheckCameraInfo(TutkWyzeProtocolMessage):
 
     Not terribly well understood.
     """
-
-    expected_response_code = 10021
 
     def __init__(self):
         super().__init__(10020)
@@ -291,8 +280,6 @@ class K10056SetResolvingBit(TutkWyzeProtocolMessage):
 
     This is sent automatically after the authentication handshake completes successfully.
     """
-
-    expected_response_code = 10057
 
     def __init__(
         self, frame_size=tutk.FRAME_SIZE_1080P, bitrate=tutk.BITRATE_HD
@@ -383,8 +370,6 @@ class K10620CheckNight(TutkWyzeProtocolMessage):
     Not terribly well understood.
     """
 
-    expected_response_code = 10621
-
     def __init__(self):
         super().__init__(10620)
 
@@ -395,8 +380,6 @@ class K10640GetSpotlightStatus(TutkWyzeProtocolMessage):
 
     Not terribly well understood.
     """
-
-    expected_response_code = 10641
 
     def __init__(self):
         super().__init__(10640)
