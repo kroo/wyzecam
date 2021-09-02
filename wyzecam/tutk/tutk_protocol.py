@@ -487,7 +487,8 @@ def respond_to_ioctrl_10001(
 
 
 def supports(product_model, protocol, command):
-    device_config = json.load(open(project_root / "device_config.json"))
+    with open(project_root / "device_config.json") as f:
+        device_config = json.load(f)
     commands_db = device_config["supportedCommands"]
     supported_commands = []
 
