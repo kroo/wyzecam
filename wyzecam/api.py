@@ -49,7 +49,7 @@ def login(
     return WyzeCredential.parse_obj(dict(resp.json(), phone_id=phone_id))
 
 
-def refresh_token(auth_info: WyzeCredential) -> WyzeAccount:
+def refresh_token(auth_info: WyzeCredential) -> WyzeCredential:
     """Refresh Auth Token
 
     This method calls out to the `/app/user/refresh_token` endpoint of
