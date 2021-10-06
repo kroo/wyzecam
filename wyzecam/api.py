@@ -190,7 +190,7 @@ def _get_payload(access_token, phone_id):
     return payload
 
 
-def get_headers(phone_id, user_agent="wyze_ios_2.23.23"):
+def get_headers(phone_id, user_agent="wyze_ios_2.24.52"):
     return {
         "X-API-Key": WYZE_APP_API_KEY,
         "Phone-Id": phone_id,
