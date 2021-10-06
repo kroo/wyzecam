@@ -11,8 +11,8 @@ SV_VALUE = "e1fe392906d54888a9b99b88de4162d7"
 SC_VALUE = "9f275790cab94a72bd206c8876429f3c"
 WYZE_APP_API_KEY = "WMXHYf79Nr5gIlt3r0r7p9Tcw5bvs6BB4U8O8nGJ"
 
-SCALE_USER_AGENT = "Wyze/2.23.23 (iPhone; iOS 14.7.1; Scale/3.00)"
-WYZE_APP_VERSION_NUM = "2.23.23"
+SCALE_USER_AGENT = "Wyze/2.24.52 (iPhone; iOS 15.0; Scale/3.00)"
+WYZE_APP_VERSION_NUM = "2.24.52"
 
 
 def login(
@@ -47,6 +47,40 @@ def login(
     resp.raise_for_status()
 
     return WyzeCredential.parse_obj(dict(resp.json(), phone_id=phone_id))
+
+
+def refresh_token(auth_info: WyzeCredential) -> WyzeCredential:
+    """Refresh Auth Token
+
+    This method calls out to the `/app/user/refresh_token` endpoint of
+    `api.wyze.com` (using https), and renews the access token necessary
+    to retrieve other information from the wyze server.
+
+    :param auth_info: the result of a [`login()`][wyzecam.api.login] call.
+    :returns: a [WyzeCredential][wyzecam.api.WyzeCredential] with the access information, suitable
+              for passing to [get_user_info()][wyzecam.api.get_user_info], or
+              [get_camera_list()][wyzecam.api.get_camera_list].
+
+    """
+    payload = _get_payload(auth_info.access_token, auth_info.phone_id)
+    payload["refresh_token"] = auth_info.refresh_token
+    ui_headers = get_headers(auth_info.phone_id, SCALE_USER_AGENT)
+    resp = requests.post(
+        "https://api.wyzecam.com/app/user/refresh_token",
+        json=payload,
+        headers=ui_headers,
+    )
+    resp.raise_for_status()
+    resp_json = resp.json()
+    assert resp_json["code"] == "1"
+
+    return WyzeCredential.parse_obj(
+        dict(
+            resp_json["data"],
+            user_id=auth_info.user_id,
+            phone_id=auth_info.phone_id,
+        )
+    )
 
 
 def get_user_info(auth_info: WyzeCredential) -> WyzeAccount:
@@ -156,7 +190,7 @@ def _get_payload(access_token, phone_id):
     return payload
 
 
-def get_headers(phone_id, user_agent="wyze_ios_2.23.23"):
+def get_headers(phone_id, user_agent="wyze_ios_2.24.52"):
     return {
         "X-API-Key": WYZE_APP_API_KEY,
         "Phone-Id": phone_id,
